@@ -13,26 +13,64 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: GradientIconCard(icon: Icons.bolt_outlined),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        toolbarHeight: 80,
+        title: Row(
           children: [
-            Text("YatriTECH"),
-            Row(
+            GradientIconCard(icon: Icons.bolt_outlined, size: 44),
+            SizedBox(width: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+
               children: [
-                Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.green,
-                  ),
+                Text("YatriTECH", style: TextStyle(fontSize: 16)),
+                Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.green,
+                      ),
+                    ),
+                    SizedBox(width: 4),
+                    Text(
+                      "Vehicle Online",
+                      style: TextStyle(fontSize: 12, color: Color(0xff6A7282)),
+                    ),
+                  ],
                 ),
-                SizedBox(width: 8),
-                Text("Vehicle Online"),
               ],
             ),
           ],
         ),
+        actions: [
+          Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Icon(
+                Icons.notifications_outlined,
+                size: 28,
+                color: Color(0xff364153),
+              ),
+              Positioned(
+                top: -3,
+                right: 0,
+                child: Container(
+                  padding: EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Text(
+                    "2",
+                    style: TextStyle(color: Colors.white, fontSize: 8),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(width: 16),
+        ],
       ),
     );
   }

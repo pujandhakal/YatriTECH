@@ -9,7 +9,11 @@ class GradientIconCard extends StatelessWidget {
   const GradientIconCard({
     super.key,
     required this.icon,
-    this.gradientColors = const [Color(0xFF2B7FFF), Color(0xFF4F39F6)],
+    this.gradientColors = const [
+      Color(0xFF155DFC),
+      Color(0xFF2B7FFF),
+      Color(0xff4F39F6),
+    ],
     this.size = 64.0,
     this.iconColor = Colors.white,
   });
