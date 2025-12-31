@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yatritech/reusable/gradient_icon_card.dart';
+import 'package:yatritech/utils/dashboard/vehical_status_card.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -72,6 +73,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
           SizedBox(width: 16),
         ],
       ),
+      body: Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: Column(
+        children: [
+          VehicalStatusCard()
+        ],
+      ),),
     );
   }
 }
