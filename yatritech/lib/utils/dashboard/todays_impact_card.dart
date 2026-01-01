@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yatritech/reusable/today_impact_inner.dart';
 
 class TodaysImpactCard extends StatefulWidget {
   const TodaysImpactCard({super.key});
@@ -61,6 +62,15 @@ class _TodaysImpactCardState extends State<TodaysImpactCard> {
                   ],
                 ),
               ),
+            ],
+          ),
+          SizedBox(height: 20),
+
+          Column(
+            children: [
+
+              TodayImpactInner()
+
             ],
           ),
         ],
