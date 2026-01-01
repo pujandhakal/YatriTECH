@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yatritech/reusable/gradient_icon_card.dart';
+import 'package:yatritech/utils/dashboard/quick_action_card.dart';
+import 'package:yatritech/utils/dashboard/todays_impact_card.dart';
 import 'package:yatritech/utils/dashboard/vehical_status_card.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -73,11 +75,46 @@ class _DashboardScreenState extends State<DashboardScreen> {
           SizedBox(width: 16),
         ],
       ),
-      body: Padding(padding: EdgeInsets.symmetric(horizontal: 16), child: Column(
-        children: [
-          VehicalStatusCard()
-        ],
-      ),),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              VehicalStatusCard(),
+              Text(
+                "Quick Actions",
+                style: TextStyle(fontSize: 16, color: Color(0xff101828)),
+              ),
+
+              SizedBox(height: 16),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  QuickActionCard(
+                    iconName: Icons.lock_outline,
+                    actionName: "Emergency SOS",
+                    gradientColor: [Color(0xff2B7FFF), Color(0xff4F39F6)],
+                  ),
+                  QuickActionCard(
+                    iconName: Icons.location_on_outlined,
+                    actionName: "Live Location",
+                    gradientColor: [Color(0xff00C950), Color(0xff009966)],
+                  ),
+                  QuickActionCard(
+                    iconName: Icons.security_outlined,
+                    actionName: "Theft Mode",
+                    gradientColor: [Color(0xffFB2C36), Color(0xffEC003F)],
+                  ),
+                ],
+              ),
+
+              TodaysImpactCard(),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

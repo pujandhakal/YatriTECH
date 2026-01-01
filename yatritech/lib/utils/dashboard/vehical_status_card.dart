@@ -11,6 +11,7 @@ class _VehicalStatusCardState extends State<VehicalStatusCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(32),
         gradient: LinearGradient(
@@ -89,8 +90,41 @@ class _VehicalStatusCardState extends State<VehicalStatusCard> {
                   size: 80,
                 ),
               ),
+
+              Positioned(
+                bottom: 35,
+                right: 0,
+                child: Container(
+                  padding: EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.green,
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
+
+          Text(
+            "Current Status",
+            style: TextStyle(color: Colors.white70, fontSize: 12),
+          ),
+
+          SizedBox(height: 4),
+          Text("Parked", style: TextStyle(color: Colors.white, fontSize: 30)),
+          SizedBox(height: 4),
+          Text(
+            "Traffic is congested Ahead.",
+            style: TextStyle(fontSize: 16, color: Colors.white70),
+          ),
+          SizedBox(height: 20),
         ],
       ),
     );
