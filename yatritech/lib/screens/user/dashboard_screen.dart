@@ -89,25 +89,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
               SizedBox(height: 16),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  QuickActionCard(
-                    iconName: Icons.lock_outline,
-                    actionName: "Emergency SOS",
-                    gradientColor: [Color(0xff2B7FFF), Color(0xff4F39F6)],
-                  ),
-                  QuickActionCard(
-                    iconName: Icons.location_on_outlined,
-                    actionName: "Live Location",
-                    gradientColor: [Color(0xff00C950), Color(0xff009966)],
-                  ),
-                  QuickActionCard(
-                    iconName: Icons.security_outlined,
-                    actionName: "Theft Mode",
-                    gradientColor: [Color(0xffFB2C36), Color(0xffEC003F)],
-                  ),
-                ],
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    QuickActionCard(
+                      iconName: Icons.lock_outline,
+                      actionName: "Emergency",
+                      gradientColor: [Color(0xff2B7FFF), Color(0xff4F39F6)],
+                    ),
+                    QuickActionCard(
+                      iconName: Icons.location_on_outlined,
+                      actionName: "Live Location",
+                      gradientColor: [Color(0xff00C950), Color(0xff009966)],
+                    ),
+                    QuickActionCard(
+                      iconName: Icons.security_outlined,
+                      actionName: "Theft Mode",
+                      gradientColor: [Color(0xffFB2C36), Color(0xffEC003F)],
+                    ),
+                  ],
+                ),
               ),
 
               TodaysImpactCard(),

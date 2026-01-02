@@ -21,7 +21,7 @@ class _QuickActionCardState extends State<QuickActionCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 16),
+      margin: EdgeInsets.only(bottom: 16, right: 16),
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 28),
       decoration: BoxDecoration(
         color: Colors.white,

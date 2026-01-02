@@ -13,6 +13,7 @@ class _TodaysImpactCardState extends State<TodaysImpactCard> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(16),
+      margin: EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(24),
@@ -68,9 +69,30 @@ class _TodaysImpactCardState extends State<TodaysImpactCard> {
 
           Column(
             children: [
-
-              TodayImpactInner()
-
+              TodayImpactInner(
+                innerName: "Time Saved",
+                progressPercent: 0.7,
+                progressGradient: [Color(0xff2B7FFF), Color(0xff4F39F6)],
+                iconName: Icons.schedule_outlined,
+                innerFirstValue: "23",
+                innerSecondValue: "min",
+              ),
+              TodayImpactInner(
+                innerName: "Fuel Saved",
+                progressPercent: 0.4,
+                progressGradient: [Color(0xff00C950), Color(0xff009966)],
+                iconName: Icons.local_gas_station_outlined,
+                innerFirstValue: "0.8",
+                innerSecondValue: "L",
+              ),
+              TodayImpactInner(
+                innerName: "CO₂ Reduced",
+                progressPercent: 0.6,
+                progressGradient: [Color(0xff00BC7D), Color(0xff009689)],
+                iconName: Icons.energy_savings_leaf_outlined,
+                innerFirstValue: "1.2",
+                innerSecondValue: "kg",
+              ),
             ],
           ),
         ],
