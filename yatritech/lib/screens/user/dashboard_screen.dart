@@ -75,6 +75,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           SizedBox(width: 16),
         ],
       ),
+      
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
