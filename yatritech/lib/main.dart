@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:yatritech/screens/user/bottom_nav.dart';
 import 'package:yatritech/screens/user/dashboard_screen.dart';
 
 void main() {
@@ -9,14 +10,14 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  // This widget is the root of application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'yatriTECH',
       theme: ThemeData(textTheme: GoogleFonts.varelaRoundTextTheme()),
       debugShowCheckedModeBanner: false,
-      home: DashboardScreen(),
+      home: BottomNav(),
     );
   }
 }
