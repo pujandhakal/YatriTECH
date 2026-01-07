@@ -101,10 +101,91 @@ class _MapScreenState extends State<MapScreen> {
               ),
             ),
           ),
+
+          Positioned(
+            top: 382,
+            right: 16,
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color.fromARGB(60, 0, 0, 0),
+                        offset: Offset(0, 20),
+                        blurRadius: 25,
+                        spreadRadius: -5,
+                      ),
+                      BoxShadow(
+                        color: Color.fromARGB(60, 0, 0, 0),
+                        offset: Offset(0, 8),
+                        blurRadius: 10,
+                        spreadRadius: -6,
+                      ),
+                    ],
+                  ),
+                  child: Icon(Icons.my_location_outlined),
+                ),
+                SizedBox(height: 12),
+
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color.fromARGB(60, 0, 0, 0),
+                        offset: Offset(0, 20),
+                        blurRadius: 25,
+                        spreadRadius: -5,
+                      ),
+                      BoxShadow(
+                        color: Color.fromARGB(60, 0, 0, 0),
+                        offset: Offset(0, 8),
+                        blurRadius: 10,
+                        spreadRadius: -6,
+                      ),
+                    ],
+                  ),
+                  child: Icon(Icons.layers_outlined),
+                ),
+
+                SizedBox(height: 12),
+
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color.fromARGB(60, 0, 0, 0),
+                        offset: Offset(0, 20),
+                        blurRadius: 25,
+                        spreadRadius: -5,
+                      ),
+                      BoxShadow(
+                        color: Color.fromARGB(60, 0, 0, 0),
+                        offset: Offset(0, 8),
+                        blurRadius: 10,
+                        spreadRadius: -6,
+                      ),
+                    ],
+                  ),
+                  child: Transform.rotate(
+                    angle: 90,
+                    child: Icon(Icons.brightness_2_outlined),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
   }
-
-  
 }
