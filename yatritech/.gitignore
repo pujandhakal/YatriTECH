@@ -23,6 +23,21 @@ migrate_working_dir/
 # is commented out by default.
 #.vscode/
 
+# Node.js server related (yatritech_server)
+yatritech_server/node_modules/
+yatritech_server/npm-debug.log*
+yatritech_server/yarn-debug.log*
+yatritech_server/yarn-error.log*
+yatritech_server/lerna-debug.log*
+yatritech_server/pnpm-debug.log*
+yatritech_server/.env
+yatritech_server/.env.local
+yatritech_server/.env.*.local
+yatritech_server/dist/
+yatritech_server/coverage/
+yatritech_server/.nyc_output/
+yatritech_server/logs/
+
 # Flutter/Dart/Pub related
 **/doc/api/
 **/ios/Flutter/.last_build_id
