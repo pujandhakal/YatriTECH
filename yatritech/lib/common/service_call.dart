@@ -16,24 +16,30 @@ class ServiceCall {
     ResFailure? failure,
   ) {
     Future(() {
-      var headers = {"Content-Type": 'application/x-www-form-urlencoded'};
+      try {
+        var headers = {"Content-Type": 'application/x-www-form-urlencoded'};
 
-      http
-          .post(Uri.parse(path), body: parameter, headers: headers)
-          .then((value) {
-            if (kDebugMode) {
-              print(value.body);
-            }
+        http
+            .post(Uri.parse(path), body: parameter, headers: headers)
+            .then((value) {
+              if (kDebugMode) {
+                print(value.body);
+              }
 
-            try {
-              var jsonObj =
-                  json.decode(value.body) as Map<String, dynamic>? ?? {};
-              if (withSuccess != null) withSuccess(jsonObj);
-            } catch (e) {
+              try {
+                var jsonObj =
+                    json.decode(value.body) as Map<String, dynamic>? ?? {};
+                if (withSuccess != null) withSuccess(jsonObj);
+              } catch (e) {
+                if (failure != null) failure(e);
+              }
+            })
+            .catchError((e) {
               if (failure != null) failure(e);
-            }
-          })
-          .catchError((error) {});
+            });
+      } catch (e) {
+        if (failure != null) failure(e);
+      }
     });
   }
 }

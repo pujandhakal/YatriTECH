@@ -12,7 +12,7 @@ module.exports.controller = (app, io, socket_list) => {
             var jsonObj = JSON.parse(data);
 
             helper.CheckParameterValidSocket(client, "UpdateSocket", jsonObj, ['uuid'], () => {
-                socket_list['us_'+ jsonObj.uuid] = {'socket_id': reqObj.socket_id};
+                socket_list['us_'+ jsonObj.uuid] = {'socket_id': client.id};
 
                 helper.Dlog(socket_list);
 

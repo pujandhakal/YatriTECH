@@ -14,7 +14,7 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require("socket.io")(server, {
   cors: {
-    origin: 'http://localhost:4200',
+    origin: '*',
     methods: ["GET", "POST"]
   }
 });
@@ -39,11 +39,15 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-fs.readFileSync('./controllers').forEach((file)=>{
+fs.readdirSync('./controllers').forEach((file)=>{
   if(file.substr(-3) == ".js"){
     route = require('./controllers/' + file);
     route.controller(app, io, user_socket_connect_list);
   }
+})
+
+app.get("/", (req, res) =>{
+  res.send("Running")
 })
 
 // catch 404 and forward to error handler
