@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import 'package:yatritech/common/globs.dart';
+import 'package:yatritech/common/location_manager.dart';
 import 'package:yatritech/common/my_http_overrides.dart';
 import 'package:yatritech/common/service_call.dart';
 import 'package:yatritech/common/socket_manager.dart';
@@ -26,6 +27,7 @@ void main() async {
   }
 
   SocketManager.shared.initSocket();
+  LocationManager.shared.initLocation();
   runApp(const MyApp());
 }
 
