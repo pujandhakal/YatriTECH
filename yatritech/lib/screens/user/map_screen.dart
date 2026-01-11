@@ -1,7 +1,11 @@
 import 'dart:async';
 
+import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:yatritech/common/location_manager.dart';
+import 'package:yatritech/common/service_call.dart';
 import 'package:yatritech/reusable/gradient_icon_card.dart';
 
 class MapScreen extends StatefulWidget {
@@ -20,12 +24,25 @@ class _MapScreenState extends State<MapScreen> {
     zoom: 14.4746,
   );
 
-  static const CameraPosition _kLake = CameraPosition(
-    bearing: 192.8334901395799,
-    target: LatLng(37.43296265331129, -122.08832357078792),
-    tilt: 59.440717697143555,
-    zoom: 19.151926040649414,
-  );
+  late LatLng currentPosition;
+
+  @override
+  void initState() {
+    super.initState();
+
+    currentPosition = LatLng(
+      LocationManager.shared.currentPos?.latitude ?? 0.0,
+      LocationManager.shared.currentPos?.longitude ?? 0.0,
+    );
+
+    FBroadcast.instance().register("update_location", (newLocation, callback) {
+      if (newLocation is Position) {
+        var mid = MarkerId(ServiceCall.userUUID);
+        var newPosition = LatLng(newLocation.latitude, newLocation.longitude);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
