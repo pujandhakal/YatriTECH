@@ -30,6 +30,26 @@ class _LoginScreenState extends State<LoginScreen> {
                     "Smarter Traffic. Safer Rides.",
                     style: TextStyle(fontSize: 16, color: Color(0xff4A5565)),
                   ),
+
+                  SizedBox(height: 32),
+                  Text("Mobile Number"),
+                  SizedBox(height: 8),
+                  Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 14,
+                          horizontal: 16,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: Color(0xffF3F4F6),
+                          border: Border.all(color: Color(0xffE5E7EB)),
+                        ),
+                        child: Text("+977"),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
