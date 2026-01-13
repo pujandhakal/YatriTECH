@@ -48,6 +48,17 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         child: Text("+977"),
                       ),
+
+                      SizedBox(width: 12),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 8,
+                          horizontal: 12,
+                        ),
+                        child: Row(
+                          children: [Icon(Icons.phone), Text("9769786820")],
+                        ),
+                      ),
                     ],
                   ),
                 ],
