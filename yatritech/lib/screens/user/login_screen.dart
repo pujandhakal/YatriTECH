@@ -59,6 +59,29 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [Icon(Icons.phone), Text("9769786820")],
                         ),
                       ),
+                      GestureDetector(
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [Color(0xff155DFC), Color(0xff4F39F6)],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Send OTP"),
+                              Icon(
+                                Icons.chevron_right,
+                                size: 20,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ],
