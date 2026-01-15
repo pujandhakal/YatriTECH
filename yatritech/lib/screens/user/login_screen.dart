@@ -59,30 +59,86 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [Icon(Icons.phone), Text("9769786820")],
                         ),
                       ),
-                      GestureDetector(
-                        child: Container(
-                          width: double.infinity,
+                    ],
+                  ),
+
+                  GestureDetector(
+                    child: Container(
+                      padding: EdgeInsets.symmetric(vertical: 14),
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        gradient: LinearGradient(
+                          colors: [Color(0xff155DFC), Color(0xff4F39F6)],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text("Send OTP"),
+                          Icon(
+                            Icons.chevron_right,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  SizedBox(height: 20),
+
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.mail_outline,
+                        size: 16,
+                        color: Color(0xff4A5565),
+                      ),
+                      SizedBox(width: 8),
+                      Text(
+                        "Login with Email",
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Color(0xff4A5565),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(height: 32),
+
+                  Container(
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Color(0xffF0FDF4),
+                      border: Border.all(color: Color(0xffDCFCE7)),
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(8),
                           decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(14),
                             gradient: LinearGradient(
-                              colors: [Color(0xff155DFC), Color(0xff4F39F6)],
+                              colors: [Color(0xff00C950), Color(0xff009966)],
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Send OTP"),
-                              Icon(
-                                Icons.chevron_right,
-                                size: 20,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
+                          child: Icon(Icons.lock_outline, size: 16),
                         ),
-                      ),
-                    ],
+
+                        SizedBox(width: 12),
+                        Text(
+                          "Your data is secure and never shared without consent",
+                          style: TextStyle(color: Color(0xff364153)),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
