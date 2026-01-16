@@ -140,6 +140,38 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                   ),
+
+                  SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xff155DFC),
+                        ),
+                        child: Icon(
+                          Icons.check_outlined,
+                          size: 20,
+                          color: Colors.white,
+                        ),
+                      ),
+                      SizedBox(width: 12),
+                      Text(
+                        "I agree to the ",
+                        style: TextStyle(color: Color(0xff4A5565)),
+                      ),
+                      Text(
+                        "Terms of Service ",
+                        style: TextStyle(color: Color(0xff155DFC)),
+                      ),
+                      Text("and", style: TextStyle(color: Color(0xff4A5565))),
+                      Text(
+                        "Privacy Policy",
+                        style: TextStyle(color: Color(0xff155DFC)),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
