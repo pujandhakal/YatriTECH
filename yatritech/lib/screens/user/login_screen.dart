@@ -172,6 +172,34 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
+
+                  SizedBox(height: 20),
+                  Divider(),
+                  SizedBox(height: 12),
+                  Row(
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.help, size: 16, color: Color(0xff4A5565)),
+                          SizedBox(width: 8),
+                          Text(
+                            "Help & Support",
+                            style: TextStyle(color: Color(0xff4A5565)),
+                          ),
+                        ],
+                      ),
+
+                      Row(
+                        children: [
+                          Icon(Icons.language_outlined),
+                          Text(
+                            "नेपाली",
+                            style: TextStyle(color: Color(0xff4A5565)),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
