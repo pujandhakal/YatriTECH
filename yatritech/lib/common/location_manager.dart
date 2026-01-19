@@ -61,6 +61,7 @@ class LocationManager {
             );
 
             currentPos = position;
+            apiCarUpdateLocation();
 
             FBroadcast.instance().broadcast("update_location", value: position);
             debugPrint(position.toString());
@@ -108,12 +109,10 @@ class LocationManager {
       },
       SVKey.svCarUpdateLocation,
       (responseObj) async {
-        if(responseObj[KKey.status ] == "1"){
-          debugPrint( responseObj[KKey.message] as String? ?? MSG.success);
-
-        }else{
-          debugPrint( responseObj[KKey.message] as String? ?? MSG.fail);
-
+        if (responseObj[KKey.status] == "1") {
+          debugPrint(responseObj[KKey.message] as String? ?? MSG.success);
+        } else {
+          debugPrint(responseObj[KKey.message] as String? ?? MSG.fail);
         }
       },
       (error) async {

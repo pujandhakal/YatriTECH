@@ -4,8 +4,10 @@ import 'package:fbroadcast/fbroadcast.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:yatritech/common/globs.dart';
 import 'package:yatritech/common/location_manager.dart';
 import 'package:yatritech/common/service_call.dart';
+import 'package:yatritech/common/socket_manager.dart';
 import 'package:yatritech/reusable/gradient_icon_card.dart';
 
 class MapScreen extends StatefulWidget {
@@ -25,7 +27,9 @@ class _MapScreenState extends State<MapScreen> {
   );
 
   late LatLng currentPosition;
-  Set<Marker> markers = Set();
+  // Set<Marker> markers = Set();
+
+  Map<String, Marker> usersCarArr = {};
 
   BitmapDescriptor? icon;
 
@@ -40,29 +44,42 @@ class _MapScreenState extends State<MapScreen> {
       LocationManager.shared.currentPos?.longitude ?? 0.0,
     );
 
-    addMarker();
-
-    FBroadcast.instance().register("update_location", (newLocation, callback) {
-      if (newLocation is Position) {
-        var mid = MarkerId(ServiceCall.userUUID);
-        var newPosition = LatLng(newLocation.latitude, newLocation.longitude);
-        markers = {
-          Marker(
-            markerId: mid,
-            position: newPosition,
-            icon: icon ?? BitmapDescriptor.defaultMarker,
-            rotation: LocationManager.calculateDegree(
-              currentPosition,
-              newPosition,
-            ),
-            anchor: const Offset(0.5, 0.5),
-          ),
-        };
-        currentPosition = newPosition;
-
-        setState(() {});
-      }
+    SocketManager.shared.socket?.on(SVKey.nvCarJoin, (data) {
+      if (data[KKey.status] == "1") {
+        updateOtherCarLocation(data[KKey.payload] as Map? ?? {});
+      } else {}
     });
+    SocketManager.shared.socket?.on(SVKey.nvCarUpdateLocation, (data) {
+      if (data[KKey.status] == "1") {
+        updateOtherCarLocation(data[KKey.payload] as Map? ?? {});
+      } else {}
+    });
+
+    apiCarJoin();
+
+    // addMarker();
+
+    // FBroadcast.instance().register("update_location", (newLocation, callback) {
+    //   if (newLocation is Position) {
+    //     var mid = MarkerId(ServiceCall.userUUID);
+    //     var newPosition = LatLng(newLocation.latitude, newLocation.longitude);
+    //     markers = {
+    //       Marker(
+    //         markerId: mid,
+    //         position: newPosition,
+    //         icon: icon ?? BitmapDescriptor.defaultMarker,
+    //         rotation: LocationManager.calculateDegree(
+    //           currentPosition,
+    //           newPosition,
+    //         ),
+    //         anchor: const Offset(0.5, 0.5),
+    //       ),
+    //     };
+    //     currentPosition = newPosition;
+
+    //     setState(() {});
+    //   }
+    // });
   }
 
   @override
@@ -81,7 +98,7 @@ class _MapScreenState extends State<MapScreen> {
             onMapCreated: (GoogleMapController controller) {
               _controller.complete(controller);
             },
-            markers: markers,
+            markers: usersCarArr.values.toSet(),
           ),
 
           Positioned(
@@ -243,17 +260,17 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 
-  void addMarker() {
-    var mid = MarkerId(ServiceCall.userUUID);
-    markers.add(
-      Marker(
-        markerId: mid,
-        position: currentPosition,
-        icon: icon ?? BitmapDescriptor.defaultMarker,
-      ),
-    );
-    setState(() {});
-  }
+  // void addMarker() {
+  //   var mid = MarkerId(ServiceCall.userUUID);
+  //   markers.add(
+  //     Marker(
+  //       markerId: mid,
+  //       position: currentPosition,
+  //       icon: icon ?? BitmapDescriptor.defaultMarker,
+  //     ),
+  //   );
+  //   setState(() {});
+  // }
 
   getIcon() async {
     var icon = await BitmapDescriptor.asset(
@@ -266,5 +283,62 @@ class _MapScreenState extends State<MapScreen> {
     setState(() {
       this.icon = icon;
     });
+  }
+
+  void updateOtherCarLocation(Map obj) {
+    usersCarArr[obj["uuid"].toString()] = Marker(
+      markerId: MarkerId(obj["uuid"].toString()),
+      position: LatLng(
+        double.tryParse(obj["lat"].toString()) ?? 0.0,
+        double.tryParse(obj["long"].toString()) ?? 0.0,
+      ),
+      icon: icon ?? BitmapDescriptor.defaultMarker,
+      rotation: double.tryParse(obj["degree"].toString()) ?? 0.0,
+      anchor: const Offset(0.5, 0.5),
+    );
+
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  //TODO: Api Calling
+
+  void apiCarJoin() {
+    ServiceCall.post(
+      {
+        "uuid": ServiceCall.userUUID,
+        "lat": currentPosition.latitude.toString(),
+        "lng": currentPosition.longitude.toString(),
+        "degree": LocationManager.shared.carDegree.toString(),
+        "socket_id": SocketManager.shared.socket?.id ?? "",
+      },
+      SVKey.svCarJoin,
+      (responseObj) async {
+        if (responseObj[KKey.status] == "1") {
+          (responseObj[KKey.payload] as Map? ?? {}).forEach((key, value) {
+            usersCarArr[key.toString()] = Marker(
+              markerId: MarkerId(key.toString()),
+              position: LatLng(
+                double.tryParse(value["lat"].toString()) ?? 0.0,
+                double.tryParse(value["long"].toString()) ?? 0.0,
+              ),
+              icon: icon ?? BitmapDescriptor.defaultMarker,
+              rotation: double.tryParse(value["degree"].toString()) ?? 0.0,
+              anchor: const Offset(0.5, 0.5),
+            );
+          });
+
+          if (mounted) {
+            setState(() {});
+          }
+        } else {
+          debugPrint(responseObj[KKey.message] as String? ?? MSG.fail);
+        }
+      },
+      (error) async {
+        debugPrint(error.toString());
+      },
+    );
   }
 }
