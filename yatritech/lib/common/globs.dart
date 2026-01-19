@@ -13,9 +13,15 @@ class Globs {
 }
 
 class SVKey {
-  static const mainUrl = "http://192.168.1.68:3001";
+  static const mainUrl = "http://192.168.1.84:3001";
   static const baseUrl = "$mainUrl/api/";
   static const nodeUrl = mainUrl;
+
+  static const nvCarJoin = "car_join";
+  static const nvCarUpdateLocation = "car_update_location";
+
+  static const svCarJoin = "$baseUrl$nvCarJoin";
+  static const svCarUpdateLocation = "$baseUrl$nvCarUpdateLocation";
 }
 
 class KKey {

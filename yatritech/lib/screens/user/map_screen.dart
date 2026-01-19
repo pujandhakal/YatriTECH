@@ -25,20 +25,42 @@ class _MapScreenState extends State<MapScreen> {
   );
 
   late LatLng currentPosition;
+  Set<Marker> markers = Set();
+
+  BitmapDescriptor? icon;
 
   @override
   void initState() {
     super.initState();
+
+    getIcon();
 
     currentPosition = LatLng(
       LocationManager.shared.currentPos?.latitude ?? 0.0,
       LocationManager.shared.currentPos?.longitude ?? 0.0,
     );
 
+    addMarker();
+
     FBroadcast.instance().register("update_location", (newLocation, callback) {
       if (newLocation is Position) {
         var mid = MarkerId(ServiceCall.userUUID);
         var newPosition = LatLng(newLocation.latitude, newLocation.longitude);
+        markers = {
+          Marker(
+            markerId: mid,
+            position: newPosition,
+            icon: icon ?? BitmapDescriptor.defaultMarker,
+            rotation: LocationManager.calculateDegree(
+              currentPosition,
+              newPosition,
+            ),
+            anchor: const Offset(0.5, 0.5),
+          ),
+        };
+        currentPosition = newPosition;
+
+        setState(() {});
       }
     });
   }
@@ -46,14 +68,20 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: _goToTheLake,
+        label: Text("To the lake!"),
+        icon: Icon(Icons.directions_boat),
+      ),
       body: Stack(
         children: [
           GoogleMap(
-            mapType: MapType.hybrid,
+            mapType: MapType.normal,
             initialCameraPosition: _kGooglePlex,
             onMapCreated: (GoogleMapController controller) {
               _controller.complete(controller);
             },
+            markers: markers,
           ),
 
           Positioned(
@@ -204,5 +232,39 @@ class _MapScreenState extends State<MapScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> _goToTheLake() async {
+    final GoogleMapController controller = await _controller.future;
+    await controller.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(target: currentPosition, zoom: 16),
+      ),
+    );
+  }
+
+  void addMarker() {
+    var mid = MarkerId(ServiceCall.userUUID);
+    markers.add(
+      Marker(
+        markerId: mid,
+        position: currentPosition,
+        icon: icon ?? BitmapDescriptor.defaultMarker,
+      ),
+    );
+    setState(() {});
+  }
+
+  getIcon() async {
+    var icon = await BitmapDescriptor.asset(
+      const ImageConfiguration(devicePixelRatio: 3.2),
+      "assets/car.png",
+      width: 40,
+      height: 40,
+    );
+
+    setState(() {
+      this.icon = icon;
+    });
   }
 }
