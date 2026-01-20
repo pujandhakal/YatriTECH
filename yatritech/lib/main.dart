@@ -10,6 +10,7 @@ import 'package:yatritech/common/my_http_overrides.dart';
 import 'package:yatritech/common/service_call.dart';
 import 'package:yatritech/common/socket_manager.dart';
 import 'package:yatritech/screens/user/bottom_nav.dart';
+import 'package:yatritech/screens/user/sign_up_screen.dart';
 
 SharedPreferences? prefs;
 
@@ -41,7 +42,7 @@ class MyApp extends StatelessWidget {
       title: 'yatriTECH',
       theme: ThemeData(textTheme: GoogleFonts.varelaRoundTextTheme()),
       debugShowCheckedModeBanner: false,
-      home: BottomNav(),
+      home: SignUpScreen(),
     );
   }
 }

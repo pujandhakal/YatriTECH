@@ -17,11 +17,21 @@ class SVKey {
   static const baseUrl = "$mainUrl/api/";
   static const nodeUrl = mainUrl;
 
+  // Python Django server URLs
+  static const pythonServerUrl = "http://192.168.137.1:8000";
+  static const pythonApiUrl = "$pythonServerUrl/api/navigate/";
+
   static const nvCarJoin = "car_join";
   static const nvCarUpdateLocation = "car_update_location";
 
   static const svCarJoin = "$baseUrl$nvCarJoin";
   static const svCarUpdateLocation = "$baseUrl$nvCarUpdateLocation";
+
+  // Python server endpoints
+  static const svLiveLocations = "${pythonApiUrl}live-locations/";
+  static const svPostTelemetry = "${pythonApiUrl}telemetry/";
+  static const svVehicleLocation =
+      "${pythonApiUrl}live-locations/"; // append vehicle_id
 }
 
 class KKey {
