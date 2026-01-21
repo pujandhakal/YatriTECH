@@ -75,7 +75,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     SizedBox(width: 12),
                     Expanded(
                       child: TextField(
+                        keyboardType: TextInputType.numberWithOptions(),
                         decoration: InputDecoration(
+                          hintText: "9769786820",
+                          hintStyle: TextStyle(color: Color(0xff99A1AF)),
                           prefixIcon: Icon(
                             Icons.phone_outlined,
                             size: 20,
@@ -130,6 +133,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(height: 20),
 
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+
                   children: [
                     Icon(
                       Icons.mail_outline,
@@ -154,6 +159,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         padding: EdgeInsets.all(8),
@@ -164,14 +170,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromARGB(50, 0, 201, 80),
+                              offset: Offset(0, 10),
+                              blurRadius: 15,
+                              spreadRadius: -3,
+                            ),
+                            BoxShadow(
+                              color: Color.fromARGB(50, 0, 201, 80),
+                              offset: Offset(0, 4),
+                              blurRadius: 6,
+                              spreadRadius: -4,
+                            ),
+                          ],
                         ),
-                        child: Icon(Icons.lock_outline, size: 16),
+                        child: Icon(
+                          Icons.lock_outline,
+                          size: 16,
+                          color: Colors.white,
+                        ),
                       ),
 
                       SizedBox(width: 12),
-                      Text(
-                        "Your data is secure and never shared without consent",
-                        style: TextStyle(color: Color(0xff364153)),
+                      Expanded(
+                        child: Text(
+                          "Your data is secure and never shared without consent",
+                          style: TextStyle(color: Color(0xff364153)),
+                        ),
                       ),
                     ],
                   ),
@@ -179,45 +205,57 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 SizedBox(height: 20),
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(6),
+                      padding: EdgeInsets.all(2),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: Color(0xff155DFC),
                       ),
                       child: Icon(
                         Icons.check_outlined,
-                        size: 20,
+                        size: 16,
                         color: Colors.white,
                       ),
                     ),
                     SizedBox(width: 12),
-                    Text(
-                      "I agree to the ",
-                      style: TextStyle(color: Color(0xff4A5565)),
-                    ),
-                    Text(
-                      "Terms of Service ",
-                      style: TextStyle(color: Color(0xff155DFC)),
-                    ),
-                    Text("and", style: TextStyle(color: Color(0xff4A5565))),
-                    Text(
-                      "Privacy Policy",
-                      style: TextStyle(color: Color(0xff155DFC)),
+                    Expanded(
+                      child: RichText(
+                        text: TextSpan(
+                          style: TextStyle(color: Color(0xff4A5565)),
+                          children: [
+                            TextSpan(text: "I agree to the "),
+                            TextSpan(
+                              text: "Terms of Service",
+                              style: TextStyle(color: Color(0xff155DFC)),
+                            ),
+                            TextSpan(text: " and "),
+                            TextSpan(
+                              text: "Privacy Policy",
+                              style: TextStyle(color: Color(0xff155DFC)),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
 
                 SizedBox(height: 20),
-                Divider(),
+                Divider(color: Color(0xffE5E7EB)),
                 SizedBox(height: 12),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.help, size: 16, color: Color(0xff4A5565)),
-                        SizedBox(width: 8),
+                        Icon(
+                          Icons.help_outline,
+                          size: 16,
+                          color: Color(0xff4A5565),
+                        ),
+                        SizedBox(width: 4),
                         Text(
                           "Help & Support",
                           style: TextStyle(color: Color(0xff4A5565)),
@@ -227,7 +265,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                     Row(
                       children: [
-                        Icon(Icons.language_outlined),
+                        Icon(
+                          Icons.language_outlined,
+                          size: 16,
+                          color: Color(0xff4A5565),
+                        ),
+                        SizedBox(width: 4),
                         Text(
                           "नेपाली",
                           style: TextStyle(color: Color(0xff4A5565)),
