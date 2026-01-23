@@ -16,6 +16,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         toolbarHeight: 80,
         title: Row(
           children: [
@@ -75,7 +76,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           SizedBox(width: 16),
         ],
       ),
-      
+
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(

@@ -33,12 +33,10 @@ class _MapScreenState extends State<MapScreen> {
   BitmapDescriptor? icon;
 
   // Simulation
-  bool simulationEnabled = true;
   List<CarSimulator> simulatedCars = [];
   Timer? simulationTimer;
 
   // Python server data
-  bool pythonServerEnabled = true;
   Timer? pythonDataTimer;
   List<VehicleLocation> liveVehicles = [];
 
@@ -68,69 +66,89 @@ class _MapScreenState extends State<MapScreen> {
 
     apiCarJoin();
 
-    // Initialize simulated cars
-    if (simulationEnabled) {
-      initializeSimulatedCars();
-      startSimulation();
-    }
+    // Initialize and start simulated cars
+    initializeSimulatedCars();
+    startSimulation();
 
     // Start fetching live data from Python server
-    if (pythonServerEnabled) {
-      fetchLiveVehicleData();
-      startPythonDataFetching();
-    }
+    fetchLiveVehicleData();
+    startPythonDataFetching();
   }
 
   void initializeSimulatedCars() {
-    // Create 6 cars with different starting positions and routes in Kathmandu Valley
+    // Create cars that follow predefined road paths in Kathmandu Valley
     simulatedCars = [
-      // Car 1: Around Thamel area
+      // Car 1: Ring Road route (North section)
       CarSimulator(
         id: 'sim_car_1',
-        startLat: 27.7155,
-        startLng: 85.3132,
-        routeType: RouteType.circular,
-        speed: 0.0001,
-      ),
-      // Car 2: Around Patan area
-      CarSimulator(
-        id: 'sim_car_2',
-        startLat: 27.6710,
-        startLng: 85.3250,
-        routeType: RouteType.horizontal,
+        roadPath: [
+          LatLng(27.7330, 85.3200), // Balaju
+          LatLng(27.7350, 85.3300), // Maharajgunj
+          LatLng(27.7320, 85.3400), // Bansbari
+          LatLng(27.7250, 85.3450), // Jorpati
+          LatLng(27.7150, 85.3500), // Koteshwor direction
+        ],
         speed: 0.00015,
       ),
-      // Car 3: Around Bhaktapur area
+      // Car 2: Arniko Highway
       CarSimulator(
-        id: 'sim_car_3',
-        startLat: 27.6710,
-        startLng: 85.4298,
-        routeType: RouteType.vertical,
+        id: 'sim_car_2',
+        roadPath: [
+          LatLng(27.6850, 85.3450), // Maitighar
+          LatLng(27.6900, 85.3550), // Tinkune
+          LatLng(27.6850, 85.3650), // Airport area
+          LatLng(27.6780, 85.3750), // Jadibuti
+          LatLng(27.6710, 85.3950), // Bhaktapur direction
+        ],
         speed: 0.00012,
       ),
-      // Car 4: Around New Baneshwor
+      // Car 3: Ring Road (South section)
       CarSimulator(
-        id: 'sim_car_4',
-        startLat: 27.6954,
-        startLng: 85.3448,
-        routeType: RouteType.diagonal,
+        id: 'sim_car_3',
+        roadPath: [
+          LatLng(27.6650, 85.3150), // Satdobato
+          LatLng(27.6750, 85.3250), // Jawalakhel
+          LatLng(27.6850, 85.3300), // Kupondole
+          LatLng(27.6900, 85.3350), // Thapathali
+          LatLng(27.6950, 85.3400), // Maitighar
+        ],
         speed: 0.00018,
       ),
-      // Car 5: Around Balaju area
+      // Car 4: Prithvi Highway
       CarSimulator(
-        id: 'sim_car_5',
-        startLat: 27.7330,
-        startLng: 85.3010,
-        routeType: RouteType.circular,
+        id: 'sim_car_4',
+        roadPath: [
+          LatLng(27.7172, 85.3100), // Thamel
+          LatLng(27.7200, 85.3050), // Sorhakhutte
+          LatLng(27.7280, 85.2980), // Balaju
+          LatLng(27.7350, 85.2900), // Ring Road junction
+          LatLng(27.7400, 85.2800), // Kalanki direction
+        ],
         speed: 0.00013,
       ),
-      // Car 6: Around Koteshwor area
+      // Car 5: East-West through city center
+      CarSimulator(
+        id: 'sim_car_5',
+        roadPath: [
+          LatLng(27.7100, 85.3050), // Sorhakhutte
+          LatLng(27.7100, 85.3150), // Thamel
+          LatLng(27.7100, 85.3240), // Ratna Park
+          LatLng(27.7100, 85.3340), // New Road
+          LatLng(27.7100, 85.3440), // Koteshwor direction
+        ],
+        speed: 0.00016,
+      ),
+      // Car 6: Araniko Highway (reverse)
       CarSimulator(
         id: 'sim_car_6',
-        startLat: 27.6780,
-        startLng: 85.3480,
-        routeType: RouteType.zigzag,
-        speed: 0.00016,
+        roadPath: [
+          LatLng(27.6710, 85.4298), // Bhaktapur
+          LatLng(27.6750, 85.4100), // Sallaghari
+          LatLng(27.6780, 85.3900), // Jadibuti
+          LatLng(27.6850, 85.3700), // Airport
+          LatLng(27.6900, 85.3500), // Tinkune
+        ],
+        speed: 0.00014,
       ),
     ];
   }
@@ -174,41 +192,6 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            heroTag: 'toggle_python',
-            onPressed: togglePythonServer,
-            backgroundColor: pythonServerEnabled
-                ? Color(0xff10B981)
-                : Color(0xffEF4444),
-            child: Icon(
-              pythonServerEnabled ? Icons.cloud : Icons.cloud_off,
-              color: Colors.white,
-            ),
-            mini: true,
-          ),
-          SizedBox(height: 10),
-          FloatingActionButton(
-            heroTag: 'toggle_sim',
-            onPressed: toggleSimulation,
-            backgroundColor: Color(0xff3370FD),
-            child: Icon(
-              simulationEnabled ? Icons.pause : Icons.play_arrow,
-              color: Colors.white,
-            ),
-            mini: true,
-          ),
-          // SizedBox(height: 10),
-          // FloatingActionButton.extended(
-          //   heroTag: 'center',
-          //   onPressed: _goToKathmandu,
-          //   label: Text("Center View"),
-          //   icon: Icon(Icons.my_location),
-          // ),
-        ],
-      ),
       body: Stack(
         children: [
           GoogleMap(
@@ -420,37 +403,6 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 
-  void toggleSimulation() {
-    setState(() {
-      simulationEnabled = !simulationEnabled;
-    });
-
-    if (simulationEnabled) {
-      startSimulation();
-    } else {
-      simulationTimer?.cancel();
-    }
-  }
-
-  void togglePythonServer() {
-    setState(() {
-      pythonServerEnabled = !pythonServerEnabled;
-    });
-
-    if (pythonServerEnabled) {
-      fetchLiveVehicleData();
-      startPythonDataFetching();
-    } else {
-      pythonDataTimer?.cancel();
-      // Remove Python server markers
-      usersCarArr.removeWhere((key, value) => key.startsWith('python_'));
-      liveVehicles.clear();
-      if (mounted) {
-        setState(() {});
-      }
-    }
-  }
-
   /// Start periodic fetching of data from Python server
   void startPythonDataFetching() {
     pythonDataTimer = Timer.periodic(Duration(seconds: 5), (timer) {
@@ -460,8 +412,6 @@ class _MapScreenState extends State<MapScreen> {
 
   /// Fetch live vehicle locations from Python Django server
   Future<void> fetchLiveVehicleData() async {
-    if (!pythonServerEnabled) return;
-
     try {
       final locations = await TelemetryService.getLiveLocations();
 
@@ -584,66 +534,45 @@ class _MapScreenState extends State<MapScreen> {
 }
 
 // Car Simulator Class
-enum RouteType { circular, horizontal, vertical, diagonal, zigzag }
-
 class CarSimulator {
   final String id;
+  final List<LatLng> roadPath;
+  final double speed;
+
+  int currentSegment = 0;
   double currentLat;
   double currentLng;
   double bearing = 0.0;
-  final RouteType routeType;
-  final double speed;
-  int tick = 0;
+  double progress = 0.0; // Progress along current segment (0.0 to 1.0)
 
-  CarSimulator({
-    required this.id,
-    required double startLat,
-    required double startLng,
-    required this.routeType,
-    required this.speed,
-  }) : currentLat = startLat,
-       currentLng = startLng;
+  CarSimulator({required this.id, required this.roadPath, required this.speed})
+    : currentLat = roadPath[0].latitude,
+      currentLng = roadPath[0].longitude;
 
   void move() {
+    if (roadPath.length < 2) return;
+
     double previousLat = currentLat;
     double previousLng = currentLng;
 
-    tick++;
+    // Get current segment start and end points
+    LatLng start = roadPath[currentSegment];
+    LatLng end = roadPath[(currentSegment + 1) % roadPath.length];
 
-    switch (routeType) {
-      case RouteType.circular:
-        // Move in circular pattern
-        double angle = tick * 0.1;
-        currentLat = currentLat + speed * math.cos(angle);
-        currentLng = currentLng + speed * math.sin(angle);
-        break;
+    // Interpolate between start and end
+    progress += speed * 50; // Adjust multiplier for smoother movement
 
-      case RouteType.horizontal:
-        // Move left-right
-        currentLng = currentLng + speed * math.sin(tick * 0.05);
-        break;
-
-      case RouteType.vertical:
-        // Move up-down
-        currentLat = currentLat + speed * math.sin(tick * 0.05);
-        break;
-
-      case RouteType.diagonal:
-        // Move diagonally
-        currentLat = currentLat + speed * math.cos(tick * 0.05);
-        currentLng = currentLng + speed * math.sin(tick * 0.05);
-        break;
-
-      case RouteType.zigzag:
-        // Zigzag pattern
-        if ((tick ~/ 20) % 2 == 0) {
-          currentLng += speed;
-        } else {
-          currentLng -= speed;
-        }
-        currentLat += speed * 0.5;
-        break;
+    if (progress >= 1.0) {
+      // Move to next segment
+      progress = 0.0;
+      currentSegment = (currentSegment + 1) % roadPath.length;
+      start = roadPath[currentSegment];
+      end = roadPath[(currentSegment + 1) % roadPath.length];
     }
+
+    // Linear interpolation
+    currentLat = start.latitude + (end.latitude - start.latitude) * progress;
+    currentLng = start.longitude + (end.longitude - start.longitude) * progress;
 
     // Calculate bearing
     bearing = _calculateBearing(

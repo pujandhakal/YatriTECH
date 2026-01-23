@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:yatritech/screens/user/bottom_nav.dart';
+import 'package:yatritech/screens/user/sign_up_screen.dart';
 
 class LoginInScreen extends StatefulWidget {
   const LoginInScreen({super.key});
@@ -35,7 +37,7 @@ class _LoginInScreenState extends State<LoginInScreen> {
               ),
               children: [
                 TextSpan(
-                  text: "Connect",
+                  text: "Tech",
                   style: TextStyle(color: Color(0xff2FB8C8)),
                 ),
               ],
@@ -239,8 +241,11 @@ class _LoginInScreenState extends State<LoginInScreen> {
                     color: Colors.transparent,
                     child: InkWell(
                       borderRadius: BorderRadius.circular(16),
-                      onTap: () {
-                        // Sign in action
+                      onDoubleTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => BottomNav()),
+                        );
                       },
                       child: Center(
                         child: Row(
@@ -331,7 +336,12 @@ class _LoginInScreenState extends State<LoginInScreen> {
 
           SizedBox(height: 16),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SignUpScreen()),
+              );
+            },
             child: RichText(
               text: TextSpan(
                 text: "Don't have an account? ",
