@@ -21,9 +21,58 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
-          CircleAvatar(
-            backgroundImage: AssetImage("assets/car.png"),
-            backgroundColor: Colors.transparent,
+          Container(
+            width: 40.9,
+            height: 40.9,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Color(0xff4DA8DA), Color(0xff73C2FB)],
+              ),
+              border: Border.all(
+                color: Color(0xFFFFFFFF).withOpacity(0.5),
+                width: 1.54,
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 15,
+                  offset: Offset(0, 2),
+                ),
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 6,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Stack(
+              children: [
+                ClipOval(
+                  child: Image.network(
+                    "https://picsum.photos/240",
+                    width: 40.9,
+                    height: 40.9,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Positioned(
+                  right: 0,
+                  bottom: 0,
+                  child: Container(
+                    width: 12,
+                    height: 12,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xff51CF66),
+                      border: Border.all(color: Colors.white, width: 1.18),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           SizedBox(width: 16),
         ],
@@ -51,7 +100,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
 
               _buildTabButtons(),
               SizedBox(height: 24),
-              AnalyticsFirstCard(),
+              AnalyticsFirstCard(selectedTab: _selectedTab),
               SizedBox(height: 24),
               AnalyticsSecondCard(),
               SizedBox(height: 24),

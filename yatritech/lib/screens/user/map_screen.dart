@@ -40,6 +40,197 @@ class _MapScreenState extends State<MapScreen> {
   Timer? pythonDataTimer;
   List<VehicleLocation> liveVehicles = [];
 
+  // Search functionality
+  final TextEditingController _searchController = TextEditingController();
+  final FocusNode _searchFocusNode = FocusNode();
+  Marker? searchMarker;
+
+  // Map type
+  MapType _currentMapType = MapType.normal;
+
+  // Dark mode
+  bool _isDarkMode = false;
+  static const String _darkMapStyle = '''
+[
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#212121"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#212121"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.country",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.locality",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#bdbdbd"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#181818"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#1b1b1b"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#2c2c2c"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#8a8a8a"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#373737"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#3c3c3c"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway.controlled_access",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#4e4e4e"
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "transit",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#000000"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#3d3d3d"
+      }
+    ]
+  }
+]
+  ''';
+
   @override
   void initState() {
     super.initState();
@@ -184,6 +375,8 @@ class _MapScreenState extends State<MapScreen> {
   void dispose() {
     simulationTimer?.cancel();
     pythonDataTimer?.cancel();
+    _searchController.dispose();
+    _searchFocusNode.dispose();
     SocketManager.shared.socket?.off(SVKey.nvCarJoin);
     SocketManager.shared.socket?.off(SVKey.nvCarUpdateLocation);
     super.dispose();
@@ -195,12 +388,19 @@ class _MapScreenState extends State<MapScreen> {
       body: Stack(
         children: [
           GoogleMap(
-            mapType: MapType.normal,
+            mapType: _currentMapType,
             initialCameraPosition: _kathmanduValley,
-            onMapCreated: (GoogleMapController controller) {
+            onMapCreated: (GoogleMapController controller) async {
               _controller.complete(controller);
+              if (_isDarkMode) {
+                await controller.setMapStyle(_darkMapStyle);
+              }
             },
-            markers: usersCarArr.values.toSet(),
+            style: _isDarkMode ? _darkMapStyle : null,
+            markers: {
+              ...usersCarArr.values.toSet(),
+              if (searchMarker != null) searchMarker!,
+            },
             zoomControlsEnabled: false,
           ),
 
@@ -231,32 +431,94 @@ class _MapScreenState extends State<MapScreen> {
                       SizedBox(width: 8),
                       Expanded(
                         child: TextField(
+                          controller: _searchController,
+                          focusNode: _searchFocusNode,
+                          onSubmitted: (value) => _performSearch(value),
                           decoration: InputDecoration(
                             hintText: "Search destination",
                             hintStyle: TextStyle(
                               fontSize: 16,
                               color: Color(0xff99A1AF),
                             ),
+                            suffixIcon: _searchController.text.isNotEmpty
+                                ? IconButton(
+                                    icon: Icon(Icons.clear, size: 20),
+                                    onPressed: () {
+                                      setState(() {
+                                        _searchController.clear();
+                                        searchMarker = null;
+                                      });
+                                    },
+                                  )
+                                : null,
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.transparent),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.transparent),
                             ),
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 12,
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(width: 8),
                       Container(
-                        padding: EdgeInsets.all(10),
+                        width: 40.9,
+                        height: 40.9,
                         decoration: BoxDecoration(
-                          color: Color(0xffF3F4F6),
-                          borderRadius: BorderRadius.circular(14),
+                          shape: BoxShape.circle,
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [Color(0xff4DA8DA), Color(0xff73C2FB)],
+                          ),
+                          border: Border.all(
+                            color: Color(0xFFFFFFFF).withOpacity(0.5),
+                            width: 1.54,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 15,
+                              offset: Offset(0, 2),
+                            ),
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 6,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
                         ),
-                        child: Icon(
-                          Icons.mic_outlined,
-                          color: Color(0xff4A5565),
-                          size: 20,
+                        child: Stack(
+                          children: [
+                            ClipOval(
+                              child: Image.network(
+                                "https://picsum.photos/240",
+                                width: 40.9,
+                                height: 40.9,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Positioned(
+                              right: 0,
+                              bottom: 0,
+                              child: Container(
+                                width: 12,
+                                height: 12,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Color(0xff51CF66),
+                                  border: Border.all(
+                                    color: Colors.white,
+                                    width: 1.18,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -324,50 +586,67 @@ class _MapScreenState extends State<MapScreen> {
             right: 16,
             child: Column(
               children: [
-                Container(
-                  padding: EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color.fromARGB(60, 0, 0, 0),
-                        offset: Offset(0, 20),
-                        blurRadius: 25,
-                        spreadRadius: -5,
-                      ),
-                      BoxShadow(
-                        color: Color.fromARGB(60, 0, 0, 0),
-                        offset: Offset(0, 8),
-                        blurRadius: 10,
-                        spreadRadius: -6,
-                      ),
-                    ],
+                GestureDetector(
+                  onTap: _goToEverestCollege,
+                  child: Container(
+                    padding: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color.fromARGB(60, 0, 0, 0),
+                          offset: Offset(0, 20),
+                          blurRadius: 25,
+                          spreadRadius: -5,
+                        ),
+                        BoxShadow(
+                          color: Color.fromARGB(60, 0, 0, 0),
+                          offset: Offset(0, 8),
+                          blurRadius: 10,
+                          spreadRadius: -6,
+                        ),
+                      ],
+                    ),
+                    child: Icon(Icons.my_location_outlined),
                   ),
-                  child: Icon(Icons.my_location_outlined),
                 ),
                 SizedBox(height: 12),
-                Container(
-                  padding: EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color.fromARGB(60, 0, 0, 0),
-                        offset: Offset(0, 20),
-                        blurRadius: 25,
-                        spreadRadius: -5,
-                      ),
-                      BoxShadow(
-                        color: Color.fromARGB(60, 0, 0, 0),
-                        offset: Offset(0, 8),
-                        blurRadius: 10,
-                        spreadRadius: -6,
-                      ),
-                    ],
+                GestureDetector(
+                  onTap: _toggleMapType,
+                  child: Container(
+                    padding: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color.fromARGB(60, 0, 0, 0),
+                          offset: Offset(0, 20),
+                          blurRadius: 25,
+                          spreadRadius: -5,
+                        ),
+                        BoxShadow(
+                          color: Color.fromARGB(60, 0, 0, 0),
+                          offset: Offset(0, 8),
+                          blurRadius: 10,
+                          spreadRadius: -6,
+                        ),
+                      ],
+                    ),
+                    child: Icon(
+                      _currentMapType == MapType.normal
+                          ? Icons.layers_outlined
+                          : _currentMapType == MapType.satellite
+                          ? Icons.satellite_alt
+                          : _currentMapType == MapType.terrain
+                          ? Icons.terrain
+                          : Icons.map,
+                      color: _currentMapType == MapType.normal
+                          ? Colors.black87
+                          : Colors.black87,
+                    ),
                   ),
-                  child: Icon(Icons.layers_outlined),
                 ),
                 SizedBox(height: 12),
                 Container(
@@ -464,6 +743,33 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 
+  Future<void> _goToEverestCollege() async {
+    final GoogleMapController controller = await _controller.future;
+    const LatLng everestCollege = LatLng(
+      27.6875,
+      85.3125,
+    ); // Everest Engineering College, Sanepa
+
+    await controller.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(target: everestCollege, zoom: 17.0),
+      ),
+    );
+
+    // Add marker for the college
+    setState(() {
+      searchMarker = Marker(
+        markerId: MarkerId('everest_college'),
+        position: everestCollege,
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+        infoWindow: InfoWindow(
+          title: 'Everest Engineering College',
+          snippet: 'Sanepa, Kathmandu',
+        ),
+      );
+    });
+  }
+
   getIcon() async {
     var icon = await BitmapDescriptor.asset(
       const ImageConfiguration(devicePixelRatio: 3.2),
@@ -530,6 +836,94 @@ class _MapScreenState extends State<MapScreen> {
         debugPrint(error.toString());
       },
     );
+  }
+
+  // Search functionality
+  Future<void> _performSearch(String query) async {
+    if (query.trim().isEmpty) return;
+
+    _searchFocusNode.unfocus();
+
+    // Predefined locations in Kathmandu Valley for demo
+    final Map<String, LatLng> locations = {
+      'thamel': LatLng(27.7172, 85.3100),
+      'durbar square': LatLng(27.7045, 85.3070),
+      'pashupatinath': LatLng(27.7105, 85.3485),
+      'boudhanath': LatLng(27.7215, 85.3618),
+      'swayambhunath': LatLng(27.7149, 85.2906),
+      'patan': LatLng(27.6725, 85.3240),
+      'bhaktapur': LatLng(27.6710, 85.4298),
+      'airport': LatLng(27.6966, 85.3591),
+      'ratna park': LatLng(27.7057, 85.3154),
+      'balaju': LatLng(27.7330, 85.3000),
+      'koteshwor': LatLng(27.6779, 85.3476),
+      'new baneshwor': LatLng(27.6939, 85.3397),
+      'maitighar': LatLng(27.6967, 85.3278),
+      'kalanki': LatLng(27.6942, 85.2827),
+      'chabahil': LatLng(27.7229, 85.3540),
+    };
+
+    // Search for matching location
+    LatLng? targetLocation;
+    String? locationName;
+
+    final lowerQuery = query.toLowerCase();
+    for (var entry in locations.entries) {
+      if (entry.key.contains(lowerQuery) || lowerQuery.contains(entry.key)) {
+        targetLocation = entry.value;
+        locationName = entry.key
+            .split(' ')
+            .map((word) => word[0].toUpperCase() + word.substring(1))
+            .join(' ');
+        break;
+      }
+    }
+
+    if (targetLocation == null) {
+      // If no match, try to center on Kathmandu
+      targetLocation = LatLng(27.7172, 85.3240);
+      locationName = query;
+    }
+
+    // Add search marker
+    setState(() {
+      searchMarker = Marker(
+        markerId: MarkerId('search_result'),
+        position: targetLocation!,
+        icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+        infoWindow: InfoWindow(title: locationName!, snippet: 'Search Result'),
+      );
+    });
+
+    // Move camera to location
+    final GoogleMapController controller = await _controller.future;
+    await controller.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(target: targetLocation, zoom: 15.0),
+      ),
+    );
+  }
+
+  // Toggle between map types
+  void _toggleMapType() {
+    setState(() {
+      switch (_currentMapType) {
+        case MapType.normal:
+          _currentMapType = MapType.satellite;
+          break;
+        case MapType.satellite:
+          _currentMapType = MapType.terrain;
+          break;
+        case MapType.terrain:
+          _currentMapType = MapType.hybrid;
+          break;
+        case MapType.hybrid:
+          _currentMapType = MapType.normal;
+          break;
+        default:
+          _currentMapType = MapType.normal;
+      }
+    });
   }
 }
 

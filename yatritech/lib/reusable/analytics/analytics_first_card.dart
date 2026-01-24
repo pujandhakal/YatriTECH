@@ -2,13 +2,47 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
 class AnalyticsFirstCard extends StatefulWidget {
-  const AnalyticsFirstCard({super.key});
+  final String selectedTab;
+  const AnalyticsFirstCard({super.key, required this.selectedTab});
 
   @override
   State<AnalyticsFirstCard> createState() => _AnalyticsFirstCardState();
 }
 
-class _AnalyticsFirstCardState extends State<AnalyticsFirstCard> {
+class _AnalyticsFirstCardState extends State<AnalyticsFirstCard>
+    with SingleTickerProviderStateMixin {
+  AnimationController? _animationController;
+  Animation<double>? _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: Duration(milliseconds: 800),
+      vsync: this,
+    );
+    _animation = CurvedAnimation(
+      parent: _animationController!,
+      curve: Curves.easeInOut,
+    );
+    _animationController!.forward();
+  }
+
+  @override
+  void didUpdateWidget(AnalyticsFirstCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.selectedTab != widget.selectedTab) {
+      _animationController?.reset();
+      _animationController?.forward();
+    }
+  }
+
+  @override
+  void dispose() {
+    _animationController?.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,7 +50,6 @@ class _AnalyticsFirstCardState extends State<AnalyticsFirstCard> {
         color: Color(0xFFFFFFFF).withOpacity(0.7),
         borderRadius: BorderRadius.circular(28),
         border: Border.all(
-          
           color: Color(0xFFFFFFFF).withOpacity(0.4),
           width: 1.18,
         ),
@@ -72,50 +105,82 @@ class _AnalyticsFirstCardState extends State<AnalyticsFirstCard> {
               SizedBox(
                 width: 192,
                 height: 192,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    CustomPaint(
-                      size: Size(192, 192),
-                      painter: CircularProgressPainter(progress: 0.87),
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                child: AnimatedBuilder(
+                  animation: _animation ?? AlwaysStoppedAnimation(1.0),
+                  builder: (context, child) {
+                    final animationValue = _animation?.value ?? 0.0;
+                    final animatedProgress = 0.87 * animationValue;
+                    final displayValue = (87 * animationValue).toInt();
+                    return Stack(
+                      alignment: Alignment.center,
                       children: [
-                        Text(
-                          "87",
-                          style: TextStyle(
-                            fontSize: 60,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff2F9E44),
+                        CustomPaint(
+                          size: Size(192, 192),
+                          painter: CircularProgressPainter(
+                            progress: animatedProgress,
                           ),
                         ),
-                        Text(
-                          "out of 100",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Color(0xff6C757D),
-                          ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "$displayValue",
+                              style: TextStyle(
+                                fontSize: 60,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff2F9E44),
+                              ),
+                            ),
+                            Text(
+                              "out of 100",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Color(0xff6C757D),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ),
               SizedBox(width: 20),
 
               // Metrics
               Expanded(
-                child: Column(
-                  children: [
-                    _buildMetricRow("Smooth Driving", 0.92, Color(0xff51CF66)),
-                    SizedBox(height: 12),
-                    _buildMetricRow("Speed Control", 0.85, Color(0xff4DA8DA)),
-                    SizedBox(height: 12),
-                    _buildMetricRow("Safe Distance", 0.88, Color(0xff6ACFCF)),
-                    SizedBox(height: 12),
-                    _buildMetricRow("Cornering", 0.82, Color(0xffFFB547)),
-                  ],
+                child: AnimatedBuilder(
+                  animation: _animation ?? AlwaysStoppedAnimation(1.0),
+                  builder: (context, child) {
+                    final animationValue = _animation?.value ?? 0.0;
+                    return Column(
+                      children: [
+                        _buildMetricRow(
+                          "Smooth Driving",
+                          0.92 * animationValue,
+                          Color(0xff51CF66),
+                        ),
+                        SizedBox(height: 12),
+                        _buildMetricRow(
+                          "Speed Control",
+                          0.85 * animationValue,
+                          Color(0xff4DA8DA),
+                        ),
+                        SizedBox(height: 12),
+                        _buildMetricRow(
+                          "Safe Distance",
+                          0.88 * animationValue,
+                          Color(0xff6ACFCF),
+                        ),
+                        SizedBox(height: 12),
+                        _buildMetricRow(
+                          "Cornering",
+                          0.82 * animationValue,
+                          Color(0xffFFB547),
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
             ],

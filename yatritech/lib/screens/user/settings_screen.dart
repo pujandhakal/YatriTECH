@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:yatritech/reusable/journey/journey_first_card.dart';
-import 'package:yatritech/reusable/journey/journey_hidden_card.dart';
-import 'package:yatritech/reusable/journey/journey_second_card.dart';
+import 'package:yatritech/reusable/settings/settings_fifth_card.dart';
+import 'package:yatritech/reusable/settings/settings_first_card.dart';
+import 'package:yatritech/reusable/settings/settings_fourth_card.dart';
+import 'package:yatritech/reusable/settings/settings_second_card.dart';
+import 'package:yatritech/reusable/settings/settings_seventh_card.dart';
+import 'package:yatritech/reusable/settings/settings_sixth_card.dart';
+import 'package:yatritech/reusable/settings/settings_third_card.dart';
 
-class JourneyScreen extends StatefulWidget {
-  const JourneyScreen({super.key});
+class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({super.key});
 
   @override
-  State<JourneyScreen> createState() => _JourneyScreenState();
+  State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _JourneyScreenState extends State<JourneyScreen> {
-  bool _showHeatmap = false;
-
+class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,13 +78,13 @@ class _JourneyScreenState extends State<JourneyScreen> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Journey Memory",
+                "Settings",
                 style: TextStyle(
                   fontSize: 24,
                   color: Color(0xff343A40),
@@ -91,53 +93,23 @@ class _JourneyScreenState extends State<JourneyScreen> {
               ),
               SizedBox(height: 8),
               Text(
-                "Your complete travel history and insights",
+                "Device, alerts, and privacy controls",
                 style: TextStyle(color: Color(0xff6C757D), fontSize: 16),
               ),
               SizedBox(height: 32),
-              JourneyFirstCard(
-                showHeatmap: _showHeatmap,
-                onHeatmapToggle: () {
-                  setState(() {
-                    _showHeatmap = !_showHeatmap;
-                  });
-                },
-              ),
-              AnimatedSize(
-                duration: Duration(milliseconds: 400),
-                curve: Curves.easeInOut,
-                child: _showHeatmap
-                    ? Column(
-                        children: [SizedBox(height: 16), JourneyHiddenCard()],
-                      )
-                    : SizedBox.shrink(),
-              ),
-              SizedBox(height: 32),
-              Text("Recent Trips", style: TextStyle(fontSize: 16)),
+              SettingsFirstCard(),
               SizedBox(height: 16),
-              JourneySecondCard(
-                isModerate: true,
-                startingPoint: 'Home',
-                endingPoint: 'Office',
-                distance: 18.2,
-                minutes: 32,
-                speed: 34,
-                noOfTurns: 12,
-                noOfStops: 3,
-                date: 'Today, 9:15 AM',
-              ),
+              SettingsSecondCard(),
               SizedBox(height: 16),
-              JourneySecondCard(
-                isModerate: false,
-                startingPoint: 'Office',
-                endingPoint: 'City Mall',
-                distance: 12.5,
-                minutes: 28,
-                speed: 27,
-                noOfTurns: 8,
-                noOfStops: 5,
-                date: 'Yesterday, 6:30 PM',
-              ),
+              SettingsThirdCard(),
+              SizedBox(height: 16),
+              SettingsFourthCard(),
+              SizedBox(height: 16),
+              SettingsFifthCard(),
+              SizedBox(height: 16),
+              SettingsSixthCard(),
+              SizedBox(height: 16),
+              SettingsSeventhCard(),
               SizedBox(height: 16),
             ],
           ),

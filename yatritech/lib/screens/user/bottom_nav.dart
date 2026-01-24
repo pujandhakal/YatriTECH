@@ -3,6 +3,7 @@ import 'package:yatritech/screens/user/analytics_screen.dart';
 import 'package:yatritech/screens/user/dashboard_screen.dart';
 import 'package:yatritech/screens/user/journey_screen.dart';
 import 'package:yatritech/screens/user/map_screen.dart';
+import 'package:yatritech/screens/user/settings_screen.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});
@@ -17,9 +18,9 @@ class _BottomNavState extends State<BottomNav> {
   //List of screens
   final List<Widget> _screens = [
     MapScreen(),
-    DashboardScreen(),
     JourneyScreen(),
     AnalyticsScreen(),
+    SettingsScreen(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -36,9 +37,9 @@ class _BottomNavState extends State<BottomNav> {
         },
         items: [
           _buildNavButtons(Icon(Icons.map_outlined), "Navigate"),
-          _buildNavButtons(Icon(Icons.dashboard_outlined), "Dashboard"),
           _buildNavButtons(Icon(Icons.schedule_outlined), "Journey"),
           _buildNavButtons(Icon(Icons.analytics_outlined), "Analytics"),
+          _buildNavButtons(Icon(Icons.settings_outlined), "Settings"),
         ],
       ),
     );
