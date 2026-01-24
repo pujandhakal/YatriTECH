@@ -31,7 +31,11 @@ class _JourneyScreenState extends State<JourneyScreen> {
             children: [
               Text(
                 "Journey Memory",
-                style: TextStyle(fontSize: 24, color: Color(0xff343A40)),
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Color(0xff343A40),
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               SizedBox(height: 8),
               Text(
