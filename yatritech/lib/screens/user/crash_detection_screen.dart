@@ -28,6 +28,38 @@ class _CrashDetectionScreenState extends State<CrashDetectionScreen> {
               child: Icon(Icons.chevron_left, color: Colors.white),
             ),
           ),
+
+          Center(
+            child: Column(
+              children: [
+                Text(
+                  "30",
+                  style: TextStyle(
+                    fontSize: 72,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text("Seconds"),
+                Icon(Icons.dangerous_outlined),
+                Text(
+                  "Crash Detected",
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+                Text(
+                  "Emergency Response Active",
+                  style: TextStyle(
+                    color: Color(0xffFF6B6B),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
