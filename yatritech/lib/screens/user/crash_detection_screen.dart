@@ -57,6 +57,62 @@ class _CrashDetectionScreenState extends State<CrashDetectionScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                Wrap(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Color(0xff595959)),
+                        borderRadius: BorderRadius.circular(16),
+
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color.fromARGB(25, 255, 181, 71),
+                            Color.fromARGB(0, 0, 0, 0),
+                          ],
+                        ),
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.trending_up,
+                                size: 20,
+                                color: Color(0xffFFB547),
+                              ),
+                              Text(
+                                "Impact Force",
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            "8.4 G",
+                            style: TextStyle(
+                              fontSize: 36,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          Text(
+                            "High severity",
+                            style: TextStyle(
+                              color: Colors.white60,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
