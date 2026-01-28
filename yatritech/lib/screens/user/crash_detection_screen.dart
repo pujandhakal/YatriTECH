@@ -59,62 +59,92 @@ class _CrashDetectionScreenState extends State<CrashDetectionScreen> {
                 ),
                 Wrap(
                   children: [
-                    Container(
-                      padding: EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Color(0xff595959)),
-                        borderRadius: BorderRadius.circular(16),
-
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            Color.fromARGB(25, 255, 181, 71),
-                            Color.fromARGB(0, 0, 0, 0),
-                          ],
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.trending_up,
-                                size: 20,
-                                color: Color(0xffFFB547),
-                              ),
-                              Text(
-                                "Impact Force",
-                                style: TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Text(
-                            "8.4 G",
-                            style: TextStyle(
-                              fontSize: 36,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            "High severity",
-                            style: TextStyle(
-                              color: Colors.white60,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ),
+                    _impactContainer(
+                      icon: Icons.trending_up,
+                      iconColor: Color(0xffFFB547),
+                      topName: "IMPACT FORCE",
+                      bigName: "8.4 G",
+                      bottomName: "High severity",
+                    ),
+                    _impactContainer(
+                      icon: Icons.location_on,
+                      iconColor: Color(0xff4DA8DA),
+                      topName: "DIRECTION",
+                      bigName: "Front-Right",
+                      bottomName: "Point of impact",
+                    ),
+                    _impactContainer(
+                      icon: Icons.shield_outlined,
+                      iconColor: Color(0xffFF6B6B),
+                      topName: "VEHICLE TILT",
+                      bigName: "42°",
+                      bottomName: "Forward angle",
+                    ),
+                    _impactContainer(
+                      icon: Icons.shield_outlined,
+                      iconColor: Color(0xffFF6B6B),
+                      topName: "VEHICLE ROLL",
+                      bigName: "38°",
+                      bottomName: "Side angle",
                     ),
                   ],
                 ),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container _impactContainer({
+    required IconData icon,
+    required Color iconColor,
+    required String topName,
+    required String bigName,
+    required String bottomName,
+  }) {
+    return Container(
+      padding: EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        border: Border.all(color: Color(0xff595959)),
+        borderRadius: BorderRadius.circular(16),
+
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color.fromARGB(25, 255, 181, 71),
+            Color.fromARGB(0, 0, 0, 0),
+          ],
+        ),
+      ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Icon(icon, size: 20, color: iconColor),
+              Text(
+                topName,
+                style: TextStyle(
+                  color: Colors.white70,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          Text(
+            bigName,
+            style: TextStyle(
+              fontSize: 36,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          Text(
+            bottomName,
+            style: TextStyle(color: Colors.white60, fontSize: 12),
           ),
         ],
       ),
