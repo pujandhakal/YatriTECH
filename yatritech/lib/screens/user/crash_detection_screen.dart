@@ -89,6 +89,64 @@ class _CrashDetectionScreenState extends State<CrashDetectionScreen> {
                     ),
                   ],
                 ),
+                SizedBox(height: 8),
+                Container(
+                  padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Color(0xff595959)),
+                    borderRadius: BorderRadius.circular(16),
+
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color.fromARGB(25, 81, 207, 102),
+                        Color.fromARGB(0, 0, 0, 0),
+                      ],
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.location_on,
+                            size: 20,
+                            color: Color(0xff51CF66),
+                          ),
+                          Text(
+                            "LAST KNOWN LOCATION",
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Colors.white70,
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 12),
+                      Text(
+                        "28.6139°N, 77.2090°E",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        "Connaught Place, New Delhi",
+                        style: TextStyle(
+                          color: Color.fromARGB(50, 255, 255, 255),
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        "GPS signal: Strong • Accuracy: ±5m",
+                        style: TextStyle(color: Colors.white70, fontSize: 12),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -109,7 +167,6 @@ class _CrashDetectionScreenState extends State<CrashDetectionScreen> {
       decoration: BoxDecoration(
         border: Border.all(color: Color(0xff595959)),
         borderRadius: BorderRadius.circular(16),
-
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
