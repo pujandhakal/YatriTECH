@@ -152,8 +152,10 @@ class _CrashDetectionScreenState extends State<CrashDetectionScreen> {
                 GestureDetector(
                   onTap: () {},
                   child: Container(
+                    width: double.infinity,
                     padding: EdgeInsets.all(16),
                     decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white38),
                       gradient: LinearGradient(
                         colors: [Color(0xff51CF66), Color(0xff2F9E44)],
                         begin: Alignment.topLeft,
@@ -161,10 +163,45 @@ class _CrashDetectionScreenState extends State<CrashDetectionScreen> {
                       ),
                     ),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Icon(Icons.close, color: Colors.white, size: 40),
                         Text(
                           "I AM SAFE",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white38),
+                      gradient: LinearGradient(
+                        colors: [Color(0xffFF6B6B), Color(0xffE03131)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.phone_outlined,
+                          color: Colors.white,
+                          size: 40,
+                        ),
+                        Text(
+                          "SEND EMERGENCY HELP",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 30,
