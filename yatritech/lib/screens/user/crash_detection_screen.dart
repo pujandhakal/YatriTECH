@@ -212,6 +212,19 @@ class _CrashDetectionScreenState extends State<CrashDetectionScreen> {
                     ),
                   ),
                 ),
+
+                Text(
+                  "Auto-sending help in 25s",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  "Emergency services will be contacted automatically",
+                  style: TextStyle(color: Colors.white60),
+                ),
               ],
             ),
           ),
