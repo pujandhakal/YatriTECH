@@ -43,6 +43,31 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
               accountName: Text("Pujan Dhakal"),
               accountEmail: Text("dhakalpujan72@gmail.com"),
             ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+              decoration: BoxDecoration(
+                border: Border.all(color: Color(0xffBBE8BE)),
+                borderRadius: BorderRadius.circular(12),
+                color: Color(0xffE9F2E3),
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.check_outlined,
+                    color: Color(0xff51CF66),
+                    size: 20,
+                  ),
+                  SizedBox(width: 4),
+                  Text(
+                    "All Systems Secure",
+                    style: TextStyle(
+                      color: Color(0xff2F9E44),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
