@@ -17,21 +17,35 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            UserAccountsDrawerHeader(accountName: Text("Pujan Dhakal"), accountEmail: Text("dhakalpujan72@gmail.com"))
+            Container(
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(35, 0, 0, 0),
+                    offset: Offset(0, 10),
+                    spreadRadius: 15,
+                    blurRadius: -3,
+                  ),
+                  BoxShadow(
+                    color: Color.fromARGB(35, 0, 0, 0),
+                    offset: Offset(0, 4),
+                    spreadRadius: 6,
+                    blurRadius: -4,
+                  ),
+                ],
+                shape: BoxShape.circle,
+              ),
+              child: Icon(Icons.close, color: Color(0xff343A40), size: 20),
+            ),
+            UserAccountsDrawerHeader(
+              accountName: Text("Pujan Dhakal"),
+              accountEmail: Text("dhakalpujan72@gmail.com"),
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
