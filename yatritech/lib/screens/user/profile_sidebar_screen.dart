@@ -68,6 +68,59 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
                 ],
               ),
             ),
+
+            SizedBox(height: 32),
+            Container(
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(40, 0, 0, 0),
+                    offset: Offset(0, 8),
+                    spreadRadius: 32,
+                  ),
+                  BoxShadow(
+                    color: Color.fromARGB(40, 0, 0, 0),
+                    offset: Offset(0, 2),
+                    spreadRadius: 8,
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.directions_car_outlined,
+                                size: 24,
+                                color: Color(0xff4DA8DA),
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                "Honda Civic",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Color(0xff343A40),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Text(
+                            "DL 01 AB 1234",
+                            style: TextStyle(color: Color(0xff6C757D)),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
