@@ -116,6 +116,24 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
                           ),
                         ],
                       ),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 4,
+                          horizontal: 6,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(color: Color(0xffBEECC4)),
+                          color: Color(0xffEDF8EC),
+                        ),
+                        child: Text(
+                          "Secure",
+                          style: TextStyle(
+                            color: Color(0xff2F9E44),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ],
