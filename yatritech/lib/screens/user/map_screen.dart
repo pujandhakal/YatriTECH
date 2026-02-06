@@ -10,6 +10,9 @@ import 'package:yatritech/common/socket_manager.dart';
 import 'package:yatritech/common/telemetry_service.dart';
 import 'package:yatritech/common/models/vehicle_location.dart';
 import 'package:yatritech/reusable/gradient_icon_card.dart';
+import 'package:yatritech/reusable/map/current_trip_container.dart';
+import 'package:yatritech/reusable/map/speedometer.dart';
+import 'package:yatritech/screens/user/crash_detection_screen.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -580,6 +583,58 @@ class _MapScreenState extends State<MapScreen> {
               ),
             ),
           ),
+
+          Positioned(
+            bottom: 200,
+            left: 16,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CrashDetectionScreen(),
+                  ),
+                );
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: Color.fromARGB(230, 255, 107, 107),
+                  border: Border.all(color: Colors.white30),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(40, 0, 0, 0),
+                      offset: Offset(0, 10),
+                      blurRadius: 15,
+                      spreadRadius: -3,
+                    ),
+                    BoxShadow(
+                      color: Color.fromARGB(40, 0, 0, 0),
+                      offset: Offset(0, 4),
+                      blurRadius: 6,
+                      spreadRadius: -4,
+                    ),
+                  ],
+                ),
+                child: Text(
+                  "Test Crash",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            left: 16,
+            right: 16,
+            child: CurrentTripContainer(),
+          ),
+          Positioned(bottom: 250, left: 16, child: Speedometer()),
 
           Positioned(
             top: 382,
