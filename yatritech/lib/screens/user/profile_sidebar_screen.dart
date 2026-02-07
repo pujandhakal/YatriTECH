@@ -136,6 +136,36 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
                       ),
                     ],
                   ),
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          Icon(
+                            Icons.battery_0_bar,
+                            size: 18,
+                            color: Color(0xff4DA8DA),
+                          ),
+
+                          SizedBox(height: 2),
+                          Text(
+                            "Battery",
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: Color(0xff6C757D),
+                            ),
+                          ),
+                          SizedBox(height: 2),
+                          Text(
+                            "87%",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xff343A40),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
