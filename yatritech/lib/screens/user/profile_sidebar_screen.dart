@@ -138,31 +138,14 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
                   ),
                   Row(
                     children: [
-                      Column(
-                        children: [
-                          Icon(
-                            Icons.battery_0_bar,
-                            size: 18,
-                            color: Color(0xff4DA8DA),
-                          ),
-
-                          SizedBox(height: 2),
-                          Text(
-                            "Battery",
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Color(0xff6C757D),
-                            ),
-                          ),
-                          SizedBox(height: 2),
-                          Text(
-                            "87%",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xff343A40),
-                            ),
-                          ),
-                        ],
+                      upper_container_row(
+                        iconName: Icon(
+                          Icons.battery_0_bar,
+                          size: 20,
+                          color: Color(0xff4DA8DA),
+                        ),
+                        text: "Battery",
+                        desc: "87%",
                       ),
                     ],
                   ),
@@ -172,6 +155,29 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  Column upper_container_row({
+    required Icon iconName,
+    required String text,
+    required String desc,
+  }) {
+    return Column(
+      children: [
+        iconName,
+
+        SizedBox(height: 2),
+        Text(text, style: TextStyle(fontSize: 12, color: Color(0xff6C757D))),
+        SizedBox(height: 2),
+        Text(
+          desc,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Color(0xff343A40),
+          ),
+        ),
+      ],
     );
   }
 }
