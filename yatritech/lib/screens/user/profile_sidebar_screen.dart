@@ -147,6 +147,24 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
                         text: "Battery",
                         desc: "87%",
                       ),
+                      upper_container_row(
+                        iconName: Icon(
+                          Icons.shield_outlined,
+                          size: 20,
+                          color: Color(0xff6ACFCF),
+                        ),
+                        text: "Protection",
+                        desc: "Active",
+                      ),
+                      upper_container_row(
+                        iconName: Icon(
+                          Icons.location_on_outlined,
+                          size: 20,
+                          color: Color(0xffFFB547),
+                        ),
+                        text: "Location",
+                        desc: "Tracked",
+                      ),
                     ],
                   ),
                 ],
