@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yatritech/reusable/journey/journey_first_card.dart';
 import 'package:yatritech/reusable/journey/journey_hidden_card.dart';
 import 'package:yatritech/reusable/journey/journey_second_card.dart';
+import 'package:yatritech/screens/user/profile_sidebar_screen.dart';
 
 class JourneyScreen extends StatefulWidget {
   const JourneyScreen({super.key});
@@ -12,10 +13,16 @@ class JourneyScreen extends StatefulWidget {
 
 class _JourneyScreenState extends State<JourneyScreen> {
   bool _showHeatmap = false;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      endDrawer: Drawer(
+        width: MediaQuery.of(context).size.width,
+        child: ProfileSidebarScreen(),
+      ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
@@ -48,12 +55,18 @@ class _JourneyScreenState extends State<JourneyScreen> {
             ),
             child: Stack(
               children: [
-                ClipOval(
-                  child: Image.network(
-                    "https://picsum.photos/240",
-                    width: 40.9,
-                    height: 40.9,
-                    fit: BoxFit.cover,
+                GestureDetector(
+                  onTap: () {
+                    _scaffoldKey.currentState?.openEndDrawer();
+                  },
+
+                  child: ClipOval(
+                    child: Image.network(
+                      "https://picsum.photos/240",
+                      width: 40.9,
+                      height: 40.9,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Positioned(
