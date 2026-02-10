@@ -169,6 +169,43 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
               ],
             ),
           ),
+
+          Container(
+            child: Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(50, 77, 168, 218),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: Color.fromARGB(50, 77, 168, 218)),
+                  ),
+                  child: Icon(
+                    Icons.trending_up,
+                    size: 24,
+                    color: Color(0xff4DA8DA),
+                  ),
+                ),
+                SizedBox(width: 12),
+                Column(
+                  children: [
+                    Text(
+                      "Today's Travel",
+                      style: TextStyle(color: Color(0xff6C757D)),
+                    ),
+                    Text(
+                      "42.3",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xff343A40),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
