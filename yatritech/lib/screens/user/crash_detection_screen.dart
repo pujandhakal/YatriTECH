@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 class CrashDetectionScreen extends StatefulWidget {
@@ -6,8 +9,49 @@ class CrashDetectionScreen extends StatefulWidget {
   @override
   State<CrashDetectionScreen> createState() => _CrashDetectionScreenState();
 }
+
 //TODO: I need to add crash audio
 class _CrashDetectionScreenState extends State<CrashDetectionScreen> {
+  int _countdown = 30;
+  Timer? _timer;
+  final AudioPlayer _audioPlayer = AudioPlayer();
+
+  @override
+  void initState() {
+    super.initState();
+    _startCountdown();
+    _playAlertSound();
+  }
+
+  Future<void> _playAlertSound() async {
+    try {
+      await _audioPlayer.play(AssetSource('accident_detection_sound.m4a'));
+    } catch (e) {
+      print('Error playing audio: $e');
+    }
+  }
+
+  void _startCountdown() {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (_countdown > 0) {
+        setState(() {
+          _countdown--;
+        });
+      } else {
+        timer.cancel();
+        //trigger emergency help
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _audioPlayer.stop();
+    _audioPlayer.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +82,7 @@ class _CrashDetectionScreenState extends State<CrashDetectionScreen> {
                 child: Column(
                   children: [
                     Text(
-                      "30",
+                      "$_countdown",
                       style: TextStyle(
                         fontSize: 72,
                         color: Colors.white,
@@ -164,7 +208,7 @@ class _CrashDetectionScreenState extends State<CrashDetectionScreen> {
                       ),
                     ),
                     SizedBox(height: 16),
-//TODO: I have to make these two below buttons Sticky(FAB), nobody wants to scroll their screen while dying
+                    //TODO: I have to make these two below buttons Sticky(FAB), nobody wants to scroll their screen while dying
                     GestureDetector(
                       onTap: () {},
                       child: Container(
@@ -234,7 +278,7 @@ class _CrashDetectionScreenState extends State<CrashDetectionScreen> {
                     SizedBox(height: 18),
 
                     Text(
-                      "Auto-sending help in 25s",
+                      "Auto-sending help in ${_countdown}",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 18,
