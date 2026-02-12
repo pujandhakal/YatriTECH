@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CrashDetectionScreen extends StatefulWidget {
   const CrashDetectionScreen({super.key});
@@ -10,7 +13,6 @@ class CrashDetectionScreen extends StatefulWidget {
   State<CrashDetectionScreen> createState() => _CrashDetectionScreenState();
 }
 
-//TODO: I need to add crash audio
 class _CrashDetectionScreenState extends State<CrashDetectionScreen> {
   int _countdown = 30;
   Timer? _timer;
@@ -31,6 +33,20 @@ class _CrashDetectionScreenState extends State<CrashDetectionScreen> {
     }
   }
 
+  Future<void> _triggerEmergencyCall() async {
+    var status = await Permission.phone.request();
+
+    if (status.isGranted) {
+      try {
+        await FlutterPhoneDirectCaller.callNumber('9812776353');
+      } catch (e) {
+        print("Error launching call: $e");
+      }
+    } else {
+      print("Phone Permission denied");
+    }
+  }
+
   void _startCountdown() {
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       if (_countdown > 0) {
@@ -39,6 +55,7 @@ class _CrashDetectionScreenState extends State<CrashDetectionScreen> {
         });
       } else {
         timer.cancel();
+        _triggerEmergencyCall();
         //trigger emergency help
       }
     });
