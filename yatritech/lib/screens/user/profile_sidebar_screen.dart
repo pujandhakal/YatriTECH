@@ -49,6 +49,86 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
             ],
           ),
 
+          Row(
+            children: [
+              Container(
+                width: 60.9,
+                height: 60.9,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Color(0xff4DA8DA), Color(0xff73C2FB)],
+                  ),
+                  border: Border.all(
+                    color: Color(0xFFFFFFFF).withOpacity(0.5),
+                    width: 1.54,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 15,
+                      offset: Offset(0, 2),
+                    ),
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 6,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Stack(
+                  children: [
+                    ClipOval(
+                      child: Image.network(
+                        "https://picsum.photos/240",
+
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Positioned(
+                      right: 0,
+                      bottom: 0,
+                      child: Container(
+                        width: 16,
+                        height: 16,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xff51CF66),
+                          border: Border.all(color: Colors.white, width: 2.18),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: 16),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Welcome back,",
+                    style: TextStyle(color: Color(0xff6C757D)),
+                  ),
+                  SizedBox(height: 2),
+                  Text(
+                    "Pujan Dhakal",
+                    style: TextStyle(fontSize: 16, color: Color(0xff343A40)),
+                  ),
+                  SizedBox(height: 2),
+                  Text(
+                    "Safe Driver • 87 Score",
+                    style: TextStyle(
+                      color: Color(0xff4DA8DA),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+
           Container(
             padding: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
             decoration: BoxDecoration(
