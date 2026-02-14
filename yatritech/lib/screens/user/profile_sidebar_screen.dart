@@ -13,6 +13,7 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 22),
           Row(
@@ -129,6 +130,8 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
             ],
           ),
 
+          SizedBox(height: 20),
+
           Container(
             padding: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
             decoration: BoxDecoration(
@@ -137,8 +140,13 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
               color: Color(0xffE9F2E3),
             ),
             child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.check_outlined, color: Color(0xff51CF66), size: 20),
+                Icon(
+                  Icons.check_circle_outline,
+                  color: Color(0xff51CF66),
+                  size: 20,
+                ),
                 SizedBox(width: 4),
                 Text(
                   "All Systems Secure",
@@ -155,27 +163,33 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
           Container(
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
+              color: Colors.white,
               borderRadius: BorderRadius.circular(20),
               boxShadow: [
                 BoxShadow(
-                  color: Color.fromARGB(40, 0, 0, 0),
+                  color: Color.fromARGB(15, 0, 0, 0),
                   offset: Offset(0, 8),
-                  spreadRadius: 32,
+                  blurRadius: 32,
                 ),
                 BoxShadow(
-                  color: Color.fromARGB(40, 0, 0, 0),
+                  color: Color.fromARGB(15, 0, 0, 0),
                   offset: Offset(0, 2),
-                  spreadRadius: 8,
+                  blurRadius: 8,
                 ),
               ],
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Icon(
                               Icons.directions_car_outlined,
@@ -192,6 +206,7 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
                             ),
                           ],
                         ),
+                        SizedBox(height: 6),
                         Text(
                           "DL 01 AB 1234",
                           style: TextStyle(color: Color(0xff6C757D)),
@@ -199,9 +214,9 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
                       ],
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 6),
+                      padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(28),
                         border: Border.all(color: Color(0xffBEECC4)),
                         color: Color(0xffEDF8EC),
                       ),
@@ -215,7 +230,10 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
                     ),
                   ],
                 ),
+
+                SizedBox(height: 24),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     upper_container_row(
                       iconName: Icon(
@@ -300,9 +318,9 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
       children: [
         iconName,
 
-        SizedBox(height: 2),
+        SizedBox(height: 4),
         Text(text, style: TextStyle(fontSize: 12, color: Color(0xff6C757D))),
-        SizedBox(height: 2),
+        SizedBox(height: 8),
         Text(
           desc,
           style: TextStyle(
