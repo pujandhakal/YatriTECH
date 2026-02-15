@@ -159,7 +159,7 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
             ),
           ),
 
-          SizedBox(height: 32),
+          SizedBox(height: 22),
           Container(
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
@@ -268,36 +268,72 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
             ),
           ),
 
+          SizedBox(height: 20),
+
           Container(
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromARGB(15, 0, 0, 0),
+                  offset: Offset(0, 8),
+                  blurRadius: 32,
+                ),
+                BoxShadow(
+                  color: Color.fromARGB(15, 0, 0, 0),
+                  offset: Offset(0, 2),
+                  blurRadius: 8,
+                ),
+              ],
+            ),
             child: Row(
               children: [
-                Container(
-                  padding: EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(50, 77, 168, 218),
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Color.fromARGB(50, 77, 168, 218)),
-                  ),
-                  child: Icon(
-                    Icons.trending_up,
-                    size: 24,
-                    color: Color(0xff4DA8DA),
-                  ),
+                Row(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(50, 77, 168, 218),
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(
+                          color: Color.fromARGB(50, 77, 168, 218),
+                        ),
+                      ),
+                      child: Icon(
+                        Icons.trending_up,
+                        size: 24,
+                        color: Color(0xff4DA8DA),
+                      ),
+                    ),
+                    SizedBox(width: 12),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Today's Travel",
+                          style: TextStyle(color: Color(0xff6C757D)),
+                        ),
+                        SizedBox(height: 2),
+                        Text(
+                          "42.3",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff343A40),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                SizedBox(width: 12),
+
                 Column(
                   children: [
                     Text(
-                      "Today's Travel",
+                      "Duration",
                       style: TextStyle(color: Color(0xff6C757D)),
-                    ),
-                    Text(
-                      "42.3",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xff343A40),
-                      ),
                     ),
                   ],
                 ),
