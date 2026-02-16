@@ -289,6 +289,7 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
               ],
             ),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
@@ -334,6 +335,15 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
                     Text(
                       "Duration",
                       style: TextStyle(color: Color(0xff6C757D)),
+                    ),
+                    SizedBox(height: 2),
+                    Text(
+                      "1h 23m",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xff343A40),
+                      ),
                     ),
                   ],
                 ),
