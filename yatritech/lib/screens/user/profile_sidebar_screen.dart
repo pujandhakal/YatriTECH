@@ -350,6 +350,34 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
               ],
             ),
           ),
+          SizedBox(height: 20),
+
+          Container(
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Color.fromARGB(15, 0, 0, 0),
+                  offset: Offset(0, 8),
+                  blurRadius: 32,
+                ),
+                BoxShadow(
+                  color: Color.fromARGB(15, 0, 0, 0),
+                  offset: Offset(0, 2),
+                  blurRadius: 8,
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                //Icon
+
+                //header and body
+              ],
+            ),
+          ),
         ],
       ),
     );
