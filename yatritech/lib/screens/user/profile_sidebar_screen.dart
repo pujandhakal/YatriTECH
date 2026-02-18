@@ -373,7 +373,15 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
             child: Row(
               children: [
                 //Icon
-
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(color: Color(0xffECF4F8)),
+                  child: Icon(
+                    Icons.bolt_outlined,
+                    color: Color(0xff4DA8DA),
+                    size: 20,
+                  ),
+                ),
                 //header and body
               ],
             ),
