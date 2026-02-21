@@ -375,13 +375,19 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
                 //Icon
                 Container(
                   padding: EdgeInsets.all(12),
-                  decoration: BoxDecoration(color: Color(0xffECF4F8)),
+                  decoration: BoxDecoration(
+                    color: Color(0xffECF4F8),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: Color.fromARGB(50, 77, 168, 218)),
+                  ),
                   child: Icon(
                     Icons.bolt_outlined,
                     color: Color(0xff4DA8DA),
-                    size: 20,
+                    size: 24,
                   ),
                 ),
+
+                SizedBox(width: 12),
                 //header and body
                 Column(
                   children: [
