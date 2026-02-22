@@ -389,21 +389,28 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
 
                 SizedBox(width: 12),
                 //header and body
-                Column(
-                  children: [
-                    Text(
-                      "Crash Detection Active",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Crash Detection Active",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 2),
-                    Text(
-                      "Emergency services will be notified automatically if an impact is detected.",
-                      style: TextStyle(color: Color(0xff6C757D)),
-                    ),
-                  ],
+                      SizedBox(height: 2),
+                      Text(
+                        "Emergency services will be notified automatically if an impact is detected.",
+
+                        style: TextStyle(
+                          color: Color(0xff6C757D),
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
