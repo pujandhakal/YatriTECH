@@ -415,6 +415,11 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
               ],
             ),
           ),
+          SizedBox(height: 20),
+          Text(
+            "Quick Actions",
+            style: TextStyle(fontSize: 16, color: Color(0xff343A40)),
+          ),
         ],
       ),
     );
