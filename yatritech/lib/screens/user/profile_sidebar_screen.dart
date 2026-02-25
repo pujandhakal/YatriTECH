@@ -452,6 +452,30 @@ class _ProfileSidebarScreenState extends State<ProfileSidebarScreen> {
                   ],
                 ),
               ),
+              Container(
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Color(0xff6ACFCF), Color(0xff51CF66)],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+                child: Column(
+                  children: [
+                    Icon(Icons.shield_outlined, size: 24, color: Colors.white),
+                    SizedBox(height: 8),
+                    Text(
+                      "Lock Vehicle",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ],
