@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yatritech/common/profile_picture.dart';
 import 'package:yatritech/reusable/settings/settings_fifth_card.dart';
 import 'package:yatritech/reusable/settings/settings_first_card.dart';
 import 'package:yatritech/reusable/settings/settings_fourth_card.dart';
@@ -6,6 +7,7 @@ import 'package:yatritech/reusable/settings/settings_second_card.dart';
 import 'package:yatritech/reusable/settings/settings_seventh_card.dart';
 import 'package:yatritech/reusable/settings/settings_sixth_card.dart';
 import 'package:yatritech/reusable/settings/settings_third_card.dart';
+import 'package:yatritech/screens/user/profile_sidebar_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -15,9 +17,15 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      endDrawer: Drawer(
+        width: MediaQuery.of(context).size.width,
+        child: ProfileSidebarScreen(),
+      ),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
@@ -50,14 +58,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             child: Stack(
               children: [
-                ClipOval(
-                  child: Image.network(
-                    "https://picsum.photos/240",
-                    width: 40.9,
-                    height: 40.9,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+                ProfilePicture(scaffoldKey: _scaffoldKey),
                 Positioned(
                   right: 0,
                   bottom: 0,

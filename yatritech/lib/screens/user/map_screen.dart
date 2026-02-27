@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:yatritech/common/globs.dart';
 import 'package:yatritech/common/location_manager.dart';
+import 'package:yatritech/common/profile_picture.dart';
 import 'package:yatritech/common/service_call.dart';
 import 'package:yatritech/common/socket_manager.dart';
 import 'package:yatritech/common/telemetry_service.dart';
@@ -13,6 +14,7 @@ import 'package:yatritech/reusable/gradient_icon_card.dart';
 import 'package:yatritech/reusable/map/current_trip_container.dart';
 import 'package:yatritech/reusable/map/speedometer.dart';
 import 'package:yatritech/screens/user/crash_detection_screen.dart';
+import 'package:yatritech/screens/user/profile_sidebar_screen.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -24,6 +26,8 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   // Kathmandu Valley center coordinates
   static const CameraPosition _kathmanduValley = CameraPosition(
@@ -388,6 +392,11 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
+      endDrawer: Drawer(
+        width: MediaQuery.of(context).size.width,
+        child: ProfileSidebarScreen(),
+      ),
       body: Stack(
         children: [
           GoogleMap(
@@ -497,14 +506,7 @@ class _MapScreenState extends State<MapScreen> {
                         ),
                         child: Stack(
                           children: [
-                            ClipOval(
-                              child: Image.network(
-                                "https://picsum.photos/240",
-                                width: 40.9,
-                                height: 40.9,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                            ProfilePicture(scaffoldKey: _scaffoldKey),
                             Positioned(
                               right: 0,
                               bottom: 0,

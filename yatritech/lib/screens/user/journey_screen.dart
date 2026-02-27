@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yatritech/common/profile_picture.dart';
 import 'package:yatritech/reusable/journey/journey_first_card.dart';
 import 'package:yatritech/reusable/journey/journey_hidden_card.dart';
 import 'package:yatritech/reusable/journey/journey_second_card.dart';
@@ -55,20 +56,7 @@ class _JourneyScreenState extends State<JourneyScreen> {
             ),
             child: Stack(
               children: [
-                GestureDetector(
-                  onTap: () {
-                    _scaffoldKey.currentState?.openEndDrawer();
-                  },
-
-                  child: ClipOval(
-                    child: Image.network(
-                      "https://picsum.photos/240",
-                      width: 40.9,
-                      height: 40.9,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
+                ProfilePicture(scaffoldKey: _scaffoldKey),
                 Positioned(
                   right: 0,
                   bottom: 0,
