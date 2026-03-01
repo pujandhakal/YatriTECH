@@ -94,6 +94,23 @@ class _SettingsFourthCardState extends State<SettingsFourthCard> {
     );
   }
 
+  void addContactPopUp() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, setDialogState) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(28),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -212,24 +229,27 @@ class _SettingsFourthCardState extends State<SettingsFourthCard> {
                           "Medical",
                           "102",
                         ),
-                        Container(
-                          height: 46.325,
-                          decoration: BoxDecoration(
-                            color: Color(0xff4DA8DA).withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(16),
-                            border: Border.all(
-                              color: Color(0xff4DA8DA).withOpacity(0.3),
-                              width: 1.18,
+                        GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            height: 46.325,
+                            decoration: BoxDecoration(
+                              color: Color(0xff4DA8DA).withOpacity(0.1),
+                              borderRadius: BorderRadius.circular(16),
+                              border: Border.all(
+                                color: Color(0xff4DA8DA).withOpacity(0.3),
+                                width: 1.18,
+                              ),
                             ),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "+ Add Emergency Contact",
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xff4DA8DA),
-                                height: 1.43,
+                            child: Center(
+                              child: Text(
+                                "+ Add Emergency Contact",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xff4DA8DA),
+                                  height: 1.43,
+                                ),
                               ),
                             ),
                           ),
