@@ -104,6 +104,18 @@ class _SettingsFourthCardState extends State<SettingsFourthCard> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(28),
               ),
+              title: Text(
+                "Add Emergency Contact",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xff343A40),
+                ),
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [],
+              ),
             );
           },
         );
