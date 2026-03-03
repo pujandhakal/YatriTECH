@@ -9,6 +9,8 @@ class SettingsFourthCard extends StatefulWidget {
 
 class _SettingsFourthCardState extends State<SettingsFourthCard> {
   bool _isExpanded = false;
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
 
   Widget _buildContactRow(
     String number,
@@ -114,7 +116,17 @@ class _SettingsFourthCardState extends State<SettingsFourthCard> {
               ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: [],
+                children: [
+                  TextField(
+                    controller: nameController,
+                    decoration: InputDecoration(
+                      labelText: "Name",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      )
+                    ),
+                  ),
+                ],
               ),
             );
           },
