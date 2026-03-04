@@ -126,6 +126,17 @@ class _SettingsFourthCardState extends State<SettingsFourthCard> {
                       )
                     ),
                   ),
+                  SizedBox(height: 12),
+                  TextField(
+                    controller: phoneController,
+                    keyboardType: TextInputType.phone,
+                    decoration: InputDecoration(
+                      labelText: "Phone Number",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      )
+                    )
+                  )
                 ],
               ),
             );
