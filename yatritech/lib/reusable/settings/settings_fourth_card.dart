@@ -11,6 +11,7 @@ class _SettingsFourthCardState extends State<SettingsFourthCard> {
   bool _isExpanded = false;
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
+  String selectedType = "Primary";
 
   Widget _buildContactRow(
     String number,
@@ -123,7 +124,7 @@ class _SettingsFourthCardState extends State<SettingsFourthCard> {
                       labelText: "Name",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),
-                      )
+                      ),
                     ),
                   ),
                   SizedBox(height: 12),
@@ -134,9 +135,18 @@ class _SettingsFourthCardState extends State<SettingsFourthCard> {
                       labelText: "Phone Number",
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),
-                      )
-                    )
-                  )
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 12),
+                  DropdownButtonFormField<String>(
+                    items: [],
+                    onChanged: (value) {
+                      setDialogState(() {
+                        selectedType = value!;
+                      });
+                    },
+                  ),
                 ],
               ),
             );
