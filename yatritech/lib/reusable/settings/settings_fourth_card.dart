@@ -140,7 +140,19 @@ class _SettingsFourthCardState extends State<SettingsFourthCard> {
                   ),
                   SizedBox(height: 12),
                   DropdownButtonFormField<String>(
-                    items: [],
+                    value: selectedType,
+                    decoration: InputDecoration(
+                      labelText: "Type",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    items: ["Primary", "Secondary", "Medical"]
+                        .map(
+                          (type) =>
+                              DropdownMenuItem(value: type, child: Text(type)),
+                        )
+                        .toList(),
                     onChanged: (value) {
                       setDialogState(() {
                         selectedType = value!;
