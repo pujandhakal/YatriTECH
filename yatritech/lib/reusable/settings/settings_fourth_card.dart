@@ -161,6 +161,15 @@ class _SettingsFourthCardState extends State<SettingsFourthCard> {
                   ),
                 ],
               ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text(
+                    "Cancel",
+                    style: TextStyle(color: Color(0xff6C757D)),
+                  ),
+                ),
+              ],
             );
           },
         );
