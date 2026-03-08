@@ -169,6 +169,12 @@ class _SettingsFourthCardState extends State<SettingsFourthCard> {
                     style: TextStyle(color: Color(0xff6C757D)),
                   ),
                 ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("Add"),
+                ),
               ],
             );
           },
