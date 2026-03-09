@@ -173,7 +173,7 @@ class _SettingsFourthCardState extends State<SettingsFourthCard> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text("Add"),
+                  child: Text("Add", style: TextStyle(color: Colors.white)),
                 ),
               ],
             );
@@ -302,7 +302,9 @@ class _SettingsFourthCardState extends State<SettingsFourthCard> {
                           "102",
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            addContactPopUp();
+                          },
                           child: Container(
                             height: 46.325,
                             decoration: BoxDecoration(
