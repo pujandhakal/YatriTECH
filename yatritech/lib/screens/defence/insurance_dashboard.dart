@@ -5,6 +5,10 @@ class InsuranceDashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    //Determin if it's web or mobile screen(wide or narrow screen )
+    final isDesktop = MediaQuery.of(context).size.width >= 800;
+    return Scaffold(
+      backgroundColor: Colors.grey.shade100,
+    );
   }
 }
