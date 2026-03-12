@@ -9,6 +9,11 @@ class InsuranceDashboard extends StatelessWidget {
     final isDesktop = MediaQuery.of(context).size.width >= 800;
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
+      appBar: isDesktop? null : AppBar(
+        title: Text("Insurance Dashboard"),
+        backgroundColor: Colors.blue.shade900,
+        foregroundColor: Colors.white,
+      )
     );
   }
 }
