@@ -21,6 +21,12 @@ class InsuranceDashboard extends StatelessWidget {
   }
 
   Widget _buildSidebar(BuildContext context) {
-    return Container();
+    return Container(
+      width: 250,
+      color: Colors.blue.shade900,
+      child: Column(
+        children: [],
+      ),
+    );
   }
 }
