@@ -25,7 +25,10 @@ class InsuranceDashboard extends StatelessWidget {
       width: 250,
       color: Colors.blue.shade900,
       child: Column(
-        children: [],
+        children: [
+          SizedBox(height: 32,),
+          Icon(Icons.shield, color: Colors.white, size: 64,),
+        ],
       ),
     );
   }
