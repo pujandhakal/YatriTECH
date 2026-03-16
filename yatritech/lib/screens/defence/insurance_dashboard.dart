@@ -26,8 +26,17 @@ class InsuranceDashboard extends StatelessWidget {
       color: Colors.blue.shade900,
       child: Column(
         children: [
-          SizedBox(height: 32,),
-          Icon(Icons.shield, color: Colors.white, size: 64,),
+          SizedBox(height: 32),
+          Icon(Icons.shield, color: Colors.white, size: 64),
+          SizedBox(height: 16),
+          Text(
+            "SecureLife",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );
