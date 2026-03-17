@@ -37,8 +37,17 @@ class InsuranceDashboard extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
+          SizedBox(height: 48),
         ],
       ),
     );
+  }
+
+  Widget _buildSidebarItem(
+    IconData icon,
+    String title, {
+    bool isSelected = false,
+  }) {
+    return Material();
   }
 }
