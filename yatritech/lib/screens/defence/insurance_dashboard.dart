@@ -48,6 +48,12 @@ class InsuranceDashboard extends StatelessWidget {
     String title, {
     bool isSelected = false,
   }) {
-    return Material();
+    return Material(
+      color: isSelected? Colors.blue.shade800: Colors.transparent,
+      child: InkWell(
+        onTap: (){},
+        hoverColor: Colors.blue.shade700,
+      )
+    );
   }
 }
