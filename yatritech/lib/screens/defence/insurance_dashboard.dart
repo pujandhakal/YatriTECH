@@ -49,11 +49,18 @@ class InsuranceDashboard extends StatelessWidget {
     bool isSelected = false,
   }) {
     return Material(
-      color: isSelected? Colors.blue.shade800: Colors.transparent,
+      color: isSelected ? Colors.blue.shade800 : Colors.transparent,
       child: InkWell(
-        onTap: (){},
+        onTap: () {},
         hoverColor: Colors.blue.shade700,
-      )
+        child: ListTile(
+          leading: Icon(icon, color: Colors.white70),
+          title: Text(
+            title,
+            style: TextStyle(color: Colors.white, fontSize: 16),
+          ),
+        ),
+      ),
     );
   }
 }
