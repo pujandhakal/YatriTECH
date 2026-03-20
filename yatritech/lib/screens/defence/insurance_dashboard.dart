@@ -38,6 +38,11 @@ class InsuranceDashboard extends StatelessWidget {
             ),
           ),
           SizedBox(height: 48),
+          _buildSidebarItem(Icons.dashboard, "Dashboard", isSelected: true),
+          _buildSidebarItem(Icons.folder_shared, "My Policies"),
+          _buildSidebarItem(Icons.receipt_long, "Claims"),
+          _buildSidebarItem(Icons.payments, "Payments"),
+          _buildSidebarItem(Icons.support_agent, "Support"),
         ],
       ),
     );
