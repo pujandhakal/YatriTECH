@@ -43,6 +43,10 @@ class InsuranceDashboard extends StatelessWidget {
           _buildSidebarItem(Icons.receipt_long, "Claims"),
           _buildSidebarItem(Icons.payments, "Payments"),
           _buildSidebarItem(Icons.support_agent, "Support"),
+          Spacer(),
+          _buildSidebarItem(Icons.settings, "Settings"),
+          _buildSidebarItem(Icons.logout, "Logout"),
+          SizedBox(height: 24,),
         ],
       ),
     );
