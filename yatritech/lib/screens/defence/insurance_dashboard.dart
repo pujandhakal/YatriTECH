@@ -46,7 +46,7 @@ class InsuranceDashboard extends StatelessWidget {
           Spacer(),
           _buildSidebarItem(Icons.settings, "Settings"),
           _buildSidebarItem(Icons.logout, "Logout"),
-          SizedBox(height: 24,),
+          SizedBox(height: 24),
         ],
       ),
     );
@@ -70,6 +70,28 @@ class InsuranceDashboard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Welcome back, Pujan!",
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 8),
+            Text(
+              "Here is an overview of your insurance portfolio.",
+              style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
