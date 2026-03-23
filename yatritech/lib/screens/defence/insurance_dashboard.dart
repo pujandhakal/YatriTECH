@@ -89,7 +89,10 @@ class InsuranceDashboard extends StatelessWidget {
               "Here is an overview of your insurance portfolio.",
               style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
             ),
-            Text("Manipulate your goals via setting", style: TextStyle(color: Colors.blue))
+            Text(
+              "Manipulate your goals via setting",
+              style: TextStyle(color: Colors.blue),
+            ),
           ],
         ),
       ],
