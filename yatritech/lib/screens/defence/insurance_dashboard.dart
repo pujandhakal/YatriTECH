@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class InsuranceDashboard extends StatelessWidget {
   const InsuranceDashboard({super.key});
@@ -89,16 +90,26 @@ class InsuranceDashboard extends StatelessWidget {
               "Here is an overview of your insurance portfolio.",
               style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
             ),
-            
           ],
         ),
 
         CircleAvatar(
           radius: 24,
           backgroundColor: Colors.blue,
-          child: Icon(Icons.person, color: Colors.white,),
-        )
+          child: Icon(Icons.person, color: Colors.white),
+        ),
       ],
+    );
+  }
+
+  Widget _buildSummaryCards(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        if (constraints.maxWidth < 600) {
+          return Column(children: []);
+        }
+        return Row(children: []);
+      },
     );
   }
 }
