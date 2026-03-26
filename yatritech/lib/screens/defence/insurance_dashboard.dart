@@ -112,4 +112,13 @@ class InsuranceDashboard extends StatelessWidget {
       },
     );
   }
+
+  Widget _buildStatCard(
+    String title,
+    String value,
+    IconData icon,
+    Color color,
+  ) {
+    return Card();
+  }
 }
