@@ -119,6 +119,10 @@ class InsuranceDashboard extends StatelessWidget {
     IconData icon,
     Color color,
   ) {
-    return Card();
+    return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: Padding(padding: EdgeInsets.all(24)),
+    );
   }
 }
