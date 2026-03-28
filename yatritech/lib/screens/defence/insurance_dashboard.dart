@@ -122,7 +122,15 @@ class InsuranceDashboard extends StatelessWidget {
     return Card(
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: Padding(padding: EdgeInsets.all(24)),
+      child: Padding(
+        padding: EdgeInsets.all(24),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [],
+          )
+        ],),
+      ),
     );
   }
 }
