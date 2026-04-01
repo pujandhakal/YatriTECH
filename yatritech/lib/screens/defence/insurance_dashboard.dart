@@ -165,6 +165,14 @@ class InsuranceDashboard extends StatelessWidget {
               "Recent Claims",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
+            SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: DataTable(columns: [], rows: []),
+              ),
+            ),
           ],
         ),
       ),
