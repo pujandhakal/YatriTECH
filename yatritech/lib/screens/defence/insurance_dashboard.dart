@@ -170,7 +170,18 @@ class InsuranceDashboard extends StatelessWidget {
               width: double.infinity,
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: DataTable(columns: [], rows: []),
+                child: DataTable(
+                  horizontalMargin: 0,
+                  columnSpacing: 24,
+                  columns: [
+                    DataColumn(label: Text("Claim ID")),
+                    DataColumn(label: Text("Policy")),
+                    DataColumn(label: Text("Date")),
+                    DataColumn(label: Text("Amount")),
+                    DataColumn(label: Text("Status")),
+                  ],
+                  rows: [],
+                ),
               ),
             ),
           ],
