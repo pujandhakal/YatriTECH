@@ -189,4 +189,15 @@ class InsuranceDashboard extends StatelessWidget {
       ),
     );
   }
+
+  DataRow _buildClaimRow(
+    String id,
+    String policy,
+    String date,
+    String amount,
+    String status,
+    Color statusColor,
+  ) {
+    return DataRow(cells: []);
+  }
 }
