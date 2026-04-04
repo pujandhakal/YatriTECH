@@ -198,6 +198,13 @@ class InsuranceDashboard extends StatelessWidget {
     String status,
     Color statusColor,
   ) {
-    return DataRow(cells: []);
+    return DataRow(
+      cells: [
+        DataCell(Text(id, style: TextStyle(fontWeight: FontWeight.w500))),
+        DataCell(Text(policy)),
+        DataCell(Text(date)),
+        DataCell(Text(amount)),
+      ],
+    );
   }
 }
