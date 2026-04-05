@@ -204,6 +204,15 @@ class InsuranceDashboard extends StatelessWidget {
         DataCell(Text(policy)),
         DataCell(Text(date)),
         DataCell(Text(amount)),
+        DataCell(
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            decoration: BoxDecoration(
+              color: statusColor.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+        ),
       ],
     );
   }
