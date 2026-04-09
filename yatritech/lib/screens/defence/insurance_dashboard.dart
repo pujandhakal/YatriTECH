@@ -269,4 +269,8 @@ class InsuranceDashboard extends StatelessWidget {
       ),
     );
   }
+
+  Widget _buildActionTile(String title, IconData icon, Color color) {
+    return ListTile();
+  }
 }
