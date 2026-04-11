@@ -275,8 +275,10 @@ class InsuranceDashboard extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
       leading: CircleAvatar(
         backgroundColor: color.withOpacity(0.1),
-        child: Icon(icon, color: color,),
+        child: Icon(icon, color: color),
       ),
+      title: Text(title, style: TextStyle(fontWeight: FontWeight.w500)),
+      trailing: Icon(Icons.chevron_right),
     );
   }
 }
