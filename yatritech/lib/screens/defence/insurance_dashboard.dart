@@ -279,6 +279,8 @@ class InsuranceDashboard extends StatelessWidget {
       ),
       title: Text(title, style: TextStyle(fontWeight: FontWeight.w500)),
       trailing: Icon(Icons.chevron_right),
+      hoverColor: Colors.grey.shade100,
+      onTap: (){},
     );
   }
 }
