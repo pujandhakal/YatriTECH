@@ -264,7 +264,9 @@ class InsuranceDashboard extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 16),
-            _buildActionTile('File a New Claim', Icons.add_circle_outline, Colors.blue)
+            _buildActionTile('File a New Claim', Icons.add_circle_outline, Colors.blue),
+            _buildActionTile('Make a Payment', Icons.payment, Colors.green),
+            _buildActionTile('Download ID Card', Icons.badge, Colors.purple)
           ],
         ),
       ),
