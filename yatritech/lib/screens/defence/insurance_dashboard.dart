@@ -264,9 +264,17 @@ class InsuranceDashboard extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 16),
-            _buildActionTile('File a New Claim', Icons.add_circle_outline, Colors.blue),
+            _buildActionTile(
+              'File a New Claim',
+              Icons.add_circle_outline,
+              Colors.blue,
+            ),
+            Divider(),
             _buildActionTile('Make a Payment', Icons.payment, Colors.green),
-            _buildActionTile('Download ID Card', Icons.badge, Colors.purple)
+            Divider(),
+            _buildActionTile('Download ID Card', Icons.badge, Colors.purple),
+            Divider(),
+            _buildActionTile("Contact Agent", Icons.headset_mic, Colors.orange),
           ],
         ),
       ),
@@ -283,7 +291,7 @@ class InsuranceDashboard extends StatelessWidget {
       title: Text(title, style: TextStyle(fontWeight: FontWeight.w500)),
       trailing: Icon(Icons.chevron_right),
       hoverColor: Colors.grey.shade100,
-      onTap: (){},
+      onTap: () {},
     );
   }
 }
