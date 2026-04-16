@@ -106,7 +106,23 @@ class InsuranceDashboard extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth < 600) {
-          return Column(children: []);
+          return Column(
+            children: [
+              _buildStatCard(
+                "Active Policies",
+                '3',
+                Icons.verified_user,
+                Colors.green,
+              ),
+              SizedBox(height: 16),
+              _buildStatCard(
+                "Pending Claims",
+                '1',
+                Icons.access_time,
+                Colors.orange,
+              ),
+            ],
+          );
         }
         return Row(children: []);
       },
