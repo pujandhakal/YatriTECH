@@ -121,6 +121,13 @@ class InsuranceDashboard extends StatelessWidget {
                 Icons.access_time,
                 Colors.orange,
               ),
+              SizedBox(height: 16),
+              _buildStatCard(
+                "Total Coverage",
+                '\$500k',
+                Icons.attach_money,
+                Colors.blue,
+              ),
             ],
           );
         }
